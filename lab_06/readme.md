@@ -1,9 +1,6 @@
+# LAB-06 KSQL & scheld-tweets
 
-1. KSQL create stream from twitter topic
-2. Stream maken met scheld-tweets
-3. KTable maken met berichten top-users tweeting about Trump obv tumbling window 5 minutes
-
-
-
-Deel twee - na het inladen van de SQL Lite data. 
-1. Maak een KTable met join van synoniemen en scheldwoorden en bijbehorende tweets om te replacen / filteren. Nog uitwerken. 
+-   Maak een KSQL stream "kstream_trump_tweets" van je topic "trump_tweets"
+-   Stream maken met een filter op scheld-tweets
+-   KTable maken met berichten van de 10 top-users tweeting about Trump obv tumbling window 5 of 10 minutes
+-   

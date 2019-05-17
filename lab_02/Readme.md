@@ -9,10 +9,11 @@ Meld je aan en voeg een app toe, dit wordt ons java programma wat tweet via de A
 Open je editor en voeg je credentials toe in de java code,
 
 Daarna kun je alles compileren met:
-
+```sh
 $ mvn clean install
-
+```
 Nu starten we het java programma, ga hiervoor op de cmdline naar targets en run de 'fat' jar met:
 
+```sh
 $ java -jar kafka-producer-twitter-1-jar-with-dependencies.jar
-
+```
