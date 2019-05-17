@@ -1,11 +1,19 @@
-# LAB-02 Maak een Twitter sniffer - kafka producer
+# Lab 2
 
--   Zorg dat je een development Twitter account hebt
--   neem de voorbeeldcode en pas deze aan zodat alle #trump berichten eruit gefilterd worden
--   Maak een topic met 3 partities aan via "kafka-topics". Noem het topic "trump_tweets"
--   Gebruik de voorbeeld producer om deze berichten naar Kafka-topic "trump_tweets" te sturen
--   Start ksql op en lees je topic uit met een simpel ksql commando PRINT
--   
+In dit lab gaan we allereerst aan de slag om van twitter tweets naar Kafka te sturen (topic twitter_tweets)
 
+Je hebt een account op twitter, hier mee kun je ook een developer account aanvragen bij twitter, ga naar de volgende URL: https://developer.twitter.com/content/developer-twitter/en.html
 
+Meld je aan en voeg een app toe, dit wordt ons java programma wat tweet via de API gaat uitlezen.
 
+Open je editor en voeg je credentials toe in de java code,
+
+Daarna kun je alles compileren met:
+```sh
+$ mvn clean install
+```
+Nu starten we het java programma, ga hiervoor op de cmdline naar targets en run de 'fat' jar met:
+
+```sh
+$ java -jar kafka-producer-twitter-1-jar-with-dependencies.jar
+```
