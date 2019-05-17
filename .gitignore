@@ -31,7 +31,7 @@ hs_err_pid*
 ._.DS_Store
 
 # extra protectie credentials niet op github
-lab_02/kafka-producer-twitter/src/main/java/kafka/tutorial2/TwitterProducer.java
+./lab_02/kafka-producer-twitter/src/main/java/kafka/tutorial2/TwitterProducer.java
 
 target
 .idea
