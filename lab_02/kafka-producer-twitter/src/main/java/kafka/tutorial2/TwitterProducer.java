@@ -23,7 +23,9 @@ import java.util.concurrent.TimeUnit;
 
 public class TwitterProducer {
 
+
     Logger logger = LoggerFactory.getLogger(TwitterProducer.class.getName());
+
 
     // use your own credentials - don't share them with anyone
     String consumerKey = "";
