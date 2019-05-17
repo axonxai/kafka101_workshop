@@ -10,12 +10,12 @@ import java.util.Properties;
  *  Producer Sends message to Kafka topic
  *
  */
-public class HandlerProducer implements Runnable {
+public class Producer implements Runnable {
 
     private String eventString;
-    private final Producer<String, String> producer;
+    private final org.apache.kafka.clients.producer.Producer<String, String> producer;
 
-    public HandlerProducer() {
+    public Producer() {
         Properties properties = new Properties();
 
         // normal producer
