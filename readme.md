@@ -1,11 +1,11 @@
 # Workshop plan
 
-1. Hello-world producer en consumer
-2. Twitter API - Sniffer
-3. Bericht schema maken voor Twitterbericht {timestamp, message}
+1. ✅ Hello-world producer en consumer 
+2. ✅ Twitter API - Sniffer 
+3. Bericht schema maken voor Twitterbericht {timestamp, message} 
 4. Brokers onderuit halen en kijken wat er gebeurt
 5. Twitter-Schema uitbreiden met user. Forward an backward compatibility aantonen
-6. KSQL stream maken met scheld-tweets. Ktable maken met aantallen berichten per user (top-users) met tumbling window.
+6. ✅ KSQL stream maken met scheld-tweets. Ktable maken met aantallen berichten per user (top-users) met tumbling window.
 7. Kafka connect - inlezen SQL lite data - tabel met Amerika synoniemen en scheldwoorden. 
 8. KSQL Join query - vervang scheld-tweets door lieve tweets 
 9. Streaming API - ??
