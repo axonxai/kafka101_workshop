@@ -70,7 +70,7 @@
                     <!-- MainClass in mainfest make a executable jar -->
                     <archive>
                         <manifest>
-                            <mainClass>kafka.tutorial2.TwitterProducer</mainClass>
+                            <mainClass>ai.axonx.workshop.MyProducer</mainClass>
                         </manifest>
                     </archive>
 
