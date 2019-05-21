@@ -1,6 +1,6 @@
 {
     "type": "record",
-    "namespace": "ai.axonx.kafkademo",
+    "namespace": "ai.axonx.workshop",
     "name": "AvroTweet",
     "version": "1",
     "fields": [
