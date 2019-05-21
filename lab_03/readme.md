@@ -17,3 +17,22 @@
 - Naast deze dependencies is de avro-maven-plugin ook benodigd om het project te bouwen, deze zal de AVRO schema's gebruiken om automagisch Java klassen te maken. Deze worden vervolgens gebruikt om met AVRO te serializen.
 - In `twitter/src/main/java/ai/axonx/kafkademo/` staan de `java` bestandjes, het leukste (en meest relevante voor de workshop) gebeurt in de TwitterProducer, deze neemt twitter berichten, filtert de twitter JSON aan de hand van het AVRO schema op enkele velden, en geeft deze door aan een Kafka broker. Voor de opdracht is het bijvoorbeeld interessant om deze Kafka berichten met AVRO serialization te laten sturen in plaats van met String serialization op JSON zoals nu het geval is. 
 
+
+# Stappenplan voor de workshop
+
+## Stap 1
+Bepaal welke data we willen verwerken.
+
+Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is.
+
+## Stap 2
+Maak een syntactisch correct schema wat aan je wensen voldoet.
+
+## Stap 3
+Maven build zodat `maven-avro-plugin` het werk voor je doet, verifieer je AVRO schema door met Gson een Tweet automagisch te parseren naar de door AVRO gegenereerde Java class.
+
+## Stap 4
+Vervang String serialization met AVRO serialization waar mogelijk:
+- KafkaProducer
+- Properties
+- ?
