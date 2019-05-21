@@ -14,7 +14,7 @@ We willen minstens de tekst van de tweet zelf.
 
 ## Stap 2
 
-Maak een syntactisch correct schema wat aan je wensen voldoet.
+Maak een syntactisch correct schema dat aan je wensen voldoet.
 
 ## Stap 3
 
