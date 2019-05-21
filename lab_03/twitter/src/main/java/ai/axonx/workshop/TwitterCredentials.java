@@ -1,4 +1,4 @@
-package ai.axonx.kafkademo;
+package ai.axonx.workshop;
 
 /**
  *

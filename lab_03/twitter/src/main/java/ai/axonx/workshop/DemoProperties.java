@@ -1,4 +1,4 @@
-package ai.axonx.kafkademo;
+package ai.axonx.workshop;
 
 import java.util.Properties;
 import org.apache.kafka.common.serialization.StringDeserializer;

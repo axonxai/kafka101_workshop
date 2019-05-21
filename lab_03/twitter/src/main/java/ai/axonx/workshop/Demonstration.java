@@ -1,4 +1,4 @@
-package ai.axonx.kafkademo;
+package ai.axonx.workshop;
 
 import com.google.gson.Gson;
 import java.util.Arrays;
