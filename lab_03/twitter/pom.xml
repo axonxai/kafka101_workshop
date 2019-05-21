@@ -6,7 +6,19 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
+    <repositories>
+        <repository>
+            <id>confluent</id>
+            <url>http://packages.confluent.io/maven/</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
+        <dependency>
+            <groupId>io.confluent</groupId>
+            <artifactId>kafka-avro-serializer</artifactId>
+            <version>5.2.1</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
@@ -28,12 +40,6 @@
             <groupId>com.twitter</groupId>
             <artifactId>hbc-core</artifactId>
             <version>2.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.confluent</groupId>
-            <artifactId>kafka-avro-serializer</artifactId>
-            <version>3.3.1</version>
-            <type>jar</type>
         </dependency>
     </dependencies>
 
