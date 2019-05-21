@@ -13,9 +13,6 @@ public class DemoProperties {
     private static final Properties properties = new Properties();
 
     public static Properties getProperties(String brokers) {
-        String serializer = StringSerializer.class.getName();
-        String deserializer = StringDeserializer.class.getName();
-
         properties.put("bootstrap.servers", brokers);
         properties.put("group.id", "demonstration");
         properties.put("enable.auto.commit", "true");
@@ -24,11 +21,15 @@ public class DemoProperties {
         properties.put("session.timeout.ms", "30000");
 
         // Serializers
+        // KafkaAvroSerializer -- KafkaAvroDeserializer
+        String serializer = StringSerializer.class.getName();
+        String deserializer = StringDeserializer.class.getName();
         properties.put("key.deserializer", deserializer);
         properties.put("value.deserializer", deserializer);
         properties.put("key.serializer", serializer);
         properties.put("value.serializer", serializer);
-
+//        properties.put("schema.registry.url", "");
+//        properties.put("specific.avro.reader", "true");
         return properties;
     }
 }
