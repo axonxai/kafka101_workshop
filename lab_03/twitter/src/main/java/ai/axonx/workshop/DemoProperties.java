@@ -31,7 +31,6 @@ public class DemoProperties {
         properties.put("key.serializer", serializer);
         properties.put("value.serializer", serializer);
 //        properties.put("schema.registry.url", "");
-//        properties.put("specific.avro.reader", "true");
         return properties;
     }
 }
