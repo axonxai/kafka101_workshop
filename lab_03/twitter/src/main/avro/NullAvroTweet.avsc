@@ -1,0 +1,55 @@
+{
+    "type": "record",
+    "namespace": "ai.axonx.workshop",
+    "name": "AvroTweet",
+    "version": "2",
+    "fields": [
+        {
+            "name": "text",
+            "type": ["null", "string"]
+        },
+        {
+            "name": "user",
+            "type": {
+                "name": "user",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "name",
+                        "type": ["null", "string"]
+                    },
+                    {
+                        "name": "screen_name",
+                        "type": ["null", "string"]
+                    },
+                    {
+                        "name": "verified",
+                        "type": ["null", "boolean"]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "retweeted_status",
+            "type": ["null", {
+                "name": "retweeted_status",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "extended_tweet",
+                        "type": ["null", {
+                            "name": "extended_tweet",
+                            "type": "record",
+                            "fields": [
+                                {
+                                    "name": "full_text",
+                                    "type": "string"
+                                }
+                            ]
+                        }]
+                    }
+                ]
+            }]
+        }
+    ]
+}
