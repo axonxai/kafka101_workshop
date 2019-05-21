@@ -80,11 +80,11 @@ Als je klaar bent met de changes dan kun je alles via je IDE compileren of handm
 Er wordt een 'Fat' jar gebouwd, die je direct kan runnen. Start het java programma met:
 
 
-    $ java -jar ./target/ai.axonx.workshop-hello-world-producer-1.0-SNAPSHOT.jar
+    $ java -jar ./target/MyProducer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 
 ## Lets code een Consumer in java
 
 Zelfde als Producer lab, volg de instruties op in de code en zie de berichten van de Producer nu via de Consumer code op de console output geprint.
 
-Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstoch rond Kafka :)
+Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstocht rond Kafka :)
