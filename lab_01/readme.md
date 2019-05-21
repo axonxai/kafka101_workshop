@@ -1,6 +1,14 @@
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
-Allereerst starten we onze kafka setup op, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
+Doel: In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
+
+Clone deze git-repo:
+
+    $ git clone git@github.com:axonxai/kafka101_workshop.git
+
+of Download de zip met een browser: https://github.com/axonxai/kafka101_workshop/archive/master.zip
+    
+We beginnen met het starten van onze kafka setup op, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
 
     $ cd cp-all-in-one
     $ docker-compose up
