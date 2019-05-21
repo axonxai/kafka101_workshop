@@ -35,4 +35,4 @@ Maven build zodat `maven-avro-plugin` het werk voor je doet, verifieer je AVRO s
 Vervang String serialization met AVRO serialization waar mogelijk:
 - KafkaProducer
 - Properties
-- ?
+- KafkaConsumer om het te testen (?)
