@@ -2,9 +2,10 @@
 
 1. ✅ Hello-world producer en consumer 
 2. ✅ Twitter API - Sniffer 
-3. Bericht schema maken voor Twitterbericht {timestamp, message} 
+3. Bericht schema maken voor Twitterbericht {timestamp, message}
+    - Een voorbeeld schema staat in `lab_03/twitter/src/main/avro`, misschien willen we dat iedereen een eigen schema maakt aan de hand van een voorbeeld schema (?)
 4. Brokers onderuit halen en kijken wat er gebeurt
-5. Twitter-Schema uitbreiden met user. Forward an backward compatibility aantonen
+5. Twitter-Schema uitbreiden met user. Forward en backward compatibility aantonen
 6. ✅ KSQL stream maken met scheld-tweets. Ktable maken met aantallen berichten per user (top-users) met tumbling window.
 7. Kafka connect - inlezen SQL lite data - tabel met Amerika synoniemen en scheldwoorden. 
 8. KSQL Join query - vervang scheld-tweets door lieve tweets 
