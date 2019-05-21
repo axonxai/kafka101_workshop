@@ -85,6 +85,8 @@ Er wordt een 'Fat' jar gebouwd, die je direct kan runnen. Start het java program
 
 ## Lets code een Consumer in java
 
-Zelfde als Producer lab, volg de instruties op in de code en zie de berichten van de Producer nu via de Consumer code op de console output geprint.
+Zelfde als Producer lab, volg de instruties op in de code en zie de berichten van de Producer nu via de Consumer code op de console output geprint. Ook nu weer is via Maven een 'Fat' jar beschikbaar.
+
+    $ java -jar ./target/MyConsumer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstocht rond Kafka :)
