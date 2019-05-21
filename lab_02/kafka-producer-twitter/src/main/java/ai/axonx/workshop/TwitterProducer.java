@@ -1,5 +1,4 @@
-package kafka.tutorial2;
-
+package ai.axonx.workshop;
 
 import com.google.common.collect.Lists;
 import com.twitter.hbc.ClientBuilder;
@@ -24,13 +23,14 @@ import java.util.concurrent.TimeUnit;
 
 public class TwitterProducer {
     Logger logger = LoggerFactory.getLogger(TwitterProducer.class.getName());
-    // use your own credentials - don't share them with anyone
+    // Add here your secrets! Don't check this in
     String consumerKey = "";
     String consumerSecret = "";
     String token = "";
     String secret = "";
 
-    List<String> terms = Lists.newArrayList("bitcoin", "usa", "politics", "sport", "soccer");
+    // Subscribe on Tweet subjects
+    List<String> terms = Lists.newArrayList("rubixnl", "realDonaldTrump","sport", "soccer");
 
 
     public TwitterProducer(){}
@@ -124,8 +124,7 @@ public class TwitterProducer {
         properties.setProperty(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, "true");
         properties.setProperty(ProducerConfig.ACKS_CONFIG, "all");
         properties.setProperty(ProducerConfig.RETRIES_CONFIG, Integer.toString(Integer.MAX_VALUE));
-        properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5"); // kafka 2.0 >= 1.1 so we can keep this as 5. Use 1 otherwise.
-
+        properties.setProperty(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, "5");
         // high throughput producer (at the expense of a bit of latency and CPU usage)
         properties.setProperty(ProducerConfig.COMPRESSION_TYPE_CONFIG, "snappy");
         properties.setProperty(ProducerConfig.LINGER_MS_CONFIG, "20");
