@@ -62,29 +62,29 @@ Open nu een nieuwe terminal en start een consumer met:
 Nu kun je het topic uitlezen en komen hier nieuwe berichten voorbij. 
 Als je alle berichten wilt zien voeg je `--from-beginning` toe aan het commando. 
 
+We hebben nu de standaard Kafka tooling gebruikt om berichten te sturen en uit te lezen uit een topic, als laatste onderdeel in dit lab gaan we dit nu doen met een stukje Java. 
+
+```Note: de antwoorden staan ook in het zelfde lab, mocht je vastlopen kun je hier spieken.```
 
 ## Lets code een producer in java
-Open je editor en voeg je ip adres en de juiste port toe toe in de java code,
+Open je favoriete editor en importeer de producer-directory,
 
-Daarna kun je alles compileren met:
+Als het goed is zie je nu de structuur van een 'Maven' project met de code onder de src-directory. Ga naar src/main/java/ai.axonx.workshop.Producer.java
+
+Volg de inststructies op in de punten in deze class, voor het ip adres gebruiken we nu localhost, mocht je onder virtualbox draaien dan kun je of via DOCKER_HOST_IP of een NAT rule maken om vanuit je laptop een connectie te maken richting de brokers
+
+Als je klaar bent met de changes dan kun je alles via je IDE compileren of handmatig comppileren in een terminal met:
 
     $ mvn clean install
 
-Nu starten we het java programma, en run de 'fat' jar met:
+Er wordt een 'Fat' jar gebouwd, die je direct kan runnen. Start het java programma met:
 
 
     $ java -jar ./target/ai.axonx.workshop-hello-world-producer-1.0-SNAPSHOT.jar
 
 
 ## Lets code een Consumer in java
-Open je editor en voeg je ip adres en de juiste port toe toe in de java code,
 
-Daarna kun je alles compileren met:
+Zelfde als Producer lab, volg de instruties op in de code en zie de berichten van de Producer nu via de Consumer code op de console output geprint.
 
-    $ mvn clean install
-
-Nu starten we het java programma, en run de 'fat' jar met:
-
-
-    $ java -jar ./target/ai.axonx.workshop-hello-world-consumer-1.0-SNAPSHOT.jar
-
+Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstoch rond Kafka :)
