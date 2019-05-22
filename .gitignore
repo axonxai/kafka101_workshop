@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-.settings/*
+.settings
 .classpath
 .vscode
 .project
