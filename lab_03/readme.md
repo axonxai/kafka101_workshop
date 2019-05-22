@@ -45,7 +45,7 @@ voorbeeld:
         ]
     }
 
-Bovenstaande Avro Schema voorbeeld wordt als een file met extentie .avsc opgeslagen.
+Bovenstaande record voorbeeld noemen we een Avro Schema en wordt als een file met extentie .avsc opgeslagen.
 
  ## Avro Primitive Types
 
@@ -81,7 +81,7 @@ Voorbeeld gebruik logical type voor onze tweets:
 
     {"name": "tijd_tweet", "type": "long", "logicalType": "timestamp-millis"}
 
-## Oefening 1
+### Oefening 1
 
 
 
