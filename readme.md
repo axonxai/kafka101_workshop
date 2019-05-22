@@ -9,7 +9,7 @@
 
 4. [skip, gaan we niet meer doen lastig 1 broker in deze setup] Brokers onderuit halen en kijken wat er gebeurt
 5. [skip, zit in lab3]Twitter-Schema uitbreiden met user. Forward en backward compatibility aantonen
-6. ✅ KSQL stream maken met scheld-tweets. Ktable maken met aantallen berichten per user (top-users) met tumbling window.
+6. ✅ KSQL stream maken met filter-tweets. Ktable maken met aantallen berichten per user (top-users) met tumbling window.
 7. Kafka connect - inlezen SQL lite data - tabel met Amerika synoniemen en scheldwoorden. 
 8. KSQL Join query - vervang scheld-tweets door lieve tweets 
 9. [skip] Streaming API - ??
