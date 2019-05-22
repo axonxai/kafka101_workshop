@@ -1,6 +1,6 @@
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
-Doel: In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
+*Doel: In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
 
 Clone deze git-repo:
 
