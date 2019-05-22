@@ -13,10 +13,6 @@ Als je binaire data tussen 2 partijen over de 'wire' wilt sturen (serializing/de
 Voorbeeld wij willen het getal '843' oversturen, als we in Kafka geen schema's gebruiken wordt alles omgezet naar String, dus het karakter '8' in utf-8 heeft standaard 2 bytes nodig, '4' nog een keer 2bytes en '3' nog een keer 2bytes, totaal 6 bytes. Met een dataformat geef je aan dit is een getal en 843 wordt dan in 1 Integer (16 bits), dus 2 bytes overgestuurd. Dit scheelt dus 4 bytes!
 Als het volume of de grote van de berichten toenemen zie je de voordelen van het gebruik van encoding. 
 
-Note: Vroeger in oude systemen zat de encoding/decoding vaak in hardware ingebakken, dus niet flexibel maar wel snel, bv. ASN1. De introductie van SOAP/XML gaf flexibel om je data te beschrijven alleen over de wire wordt alles beshouwd als karakter-String, dus trager. Daarnaast moest je op de endpoint weer veel parsen (CPU) voordat je aan de slag kunt gaan, dus wederom een delay. De verschuiving terug naar JSON gaf weer iets terug qua performance, maar dwingt geen validatie af.
-
-Er zijn tegenwoordig vele encoding/decoding frameworks voor serialization/deserialization, denk aan protobuf, parque, avro, thrift ect. Ze leveren vergelijkbare functionaliteit als data format en zijn snel. 
-
 Binnen Kafka is gekozen voor AVRO. AVRO encoding is beschreven als een JSON schema, en heeft de volgende voordelen:
 - Data is fully typed
 - Data is compressed 
