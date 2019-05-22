@@ -90,3 +90,5 @@ Zelfde als Producer lab, volg de instruties op in de code en zie de berichten va
     $ java -jar ./target/MyConsumer-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstocht rond Kafka :)
+ 
+ [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
