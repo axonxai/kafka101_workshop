@@ -1,6 +1,6 @@
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_03)
 
-# Lab 2 Data for real, Confluent Console 
+# Lab-02 Data for real, Confluent Console 
 
 Doel: Data ingestion van 'echte' bronnen (sources)
 
