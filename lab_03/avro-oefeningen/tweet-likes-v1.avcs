@@ -1,0 +1,9 @@
+{
+     "type": "record",
+     "namespace": "",
+     "name": "",
+     "doc": "",
+     "fields": [
+       { "name": "", "type": "", "doc": "" }
+     ]  
+}
