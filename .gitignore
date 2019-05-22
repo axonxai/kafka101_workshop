@@ -1,9 +1,10 @@
 # Compiled class file
 *.class
-.settings/*
+.settings
 .classpath
 .vscode
 .project
+.idea
 
 # Log file
 *.log
