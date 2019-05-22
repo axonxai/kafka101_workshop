@@ -35,15 +35,15 @@ Een Avro schema heeft een record structuur als volgt:
 
 voorbeeld:
 
- {
-     "type": "record",
-     "namespace": "ai.axonx.workshop",
-     "name": "tweet",
-     "fields": [
-       { "name": "body", "type": "string" },
-       { "name": "id", "type": "int"}
-     ]
- }
+    {
+        "type": "record",
+        "namespace": "ai.axonx.workshop",
+        "name": "tweet",
+        "fields": [
+            { "name": "body", "type": "string" },
+            { "name": "id", "type": "int"}
+        ]
+    }
 
 Bovenstaande Avro Schema voorbeeld wordt als een file met extentie .avsc opgeslagen.
 
