@@ -1,4 +1,4 @@
-# LAB-06 KSQL & scheld-tweets
+# LAB-06 KSQL & filter tweets
 In dit lab gaan we aan de slag met KSQL, de query language van Confluent. Hiermee is het bv. mogelijk om op streaming data analyses uit te voeren of om statische data en streaming data in een join te querien. 
 
 ## Een overzicht van de actiefste users
@@ -55,7 +55,7 @@ $ CREATE TABLE ktable_user_tweet_count AS
 Voor de overzichtelijkheid kun je natuurlijk nog zoiets toevoegen als `WHERE tweet_count > 3`
 
 
-## Filter "great"
+## Let's make the Filter "great"
 
 ```sh
 $ CREATE STREAM kstream_twitter_tweets_with_filter AS
@@ -65,7 +65,7 @@ WHERE text LIKE '% great %';
 ```
 
 
-## We willen weten welke actieve users schelden - Join - 
+## We willen weten welke actieve users bepaalde woorden tweeten - Join - 
 ### DIT WERKT NOG NIET
 
 ```sh

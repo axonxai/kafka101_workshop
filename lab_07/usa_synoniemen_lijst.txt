@@ -1,0 +1,10 @@
+INSERT INTO usa_synoniemen(word) VALUES
+("America")
+,("North American country")
+,("North American nation")
+,("U.S.")
+,("U.S.A.")
+,("United States")
+,("United States of America")
+,("US")
+,("USA")
