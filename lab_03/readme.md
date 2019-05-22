@@ -1,6 +1,6 @@
 # LAB-03 intermezzo AVRO schema's, met Twitteren met AVRO Producers/Consumers
 
-**Doel:** Handson met avro schema voor event messaging
+**Doel:** Handson met avro schema's voor event messaging
  - Avro schema's opstellen
  - Avro serialization gebruiken met Kafka
 
