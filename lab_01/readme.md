@@ -1,3 +1,5 @@
+[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
+
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
 **Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
