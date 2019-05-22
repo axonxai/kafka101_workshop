@@ -1,4 +1,4 @@
-# Lab 2
+# Lab 2 Data for real, Confluent Console 
 
 Doel: Data ingestion van 'echte' bronnen (sources)
 
