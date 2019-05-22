@@ -1,3 +1,5 @@
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
+
 # LAB-03 intermezzo AVRO schema's, met Twitteren met AVRO Producers/Consumers
 
 **Doel:** Handson met avro schema's voor event messaging
@@ -81,23 +83,24 @@ Voorbeeld gebruik logical type voor onze tweets:
 
     {"name": "tijd_tweet", "type": "long", "logicalType": "timestamp-millis"}
 
-### Oefening 1
+### Oefening 1 Maak een Avro schema
+
+Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
+
+Zie in de lab_03/avro-oefening1 een leeg schema, 
+Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
+
+    created_at
+    text
+    favorite_count
+
+We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
 
 
+### Oefening 2 Kafka Avro Producer
 
-De Kafka Registry is een Open-Source project van Confluents die de Avro schema's huisvest voor het gebruik van schema's in de Broker topics.
+Spiek nog even in Lab_02 naar de Producer code, we gaan nu avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor avro
 
-todo plaatje concept
-
-Avro Record Schema structuur:
-- Name
-- Namespace
-- Doc
-- ?
--Fields
---Name
---Doc
---Type
 
 
 
@@ -143,3 +146,4 @@ Vervang String serialization met AVRO serialization waar mogelijk:
 - Wat gebeurt er als je 'foute' berichten stuurt die niet in het schema passen?
 - Op welke manier(en) kan je omgaan met forward en backward compatibility?
 
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
