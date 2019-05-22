@@ -1,8 +1,8 @@
 # LAB-03 intermezzo AVRO schema's, met Twitteren met AVRO Producers/Consumers
 
 **Doel:** Handson met avro schema voor event messaging
- - AVRO schema's leren kennen, eentje opstellen
- - AVRO serialization gebruiken met Kafka
+ - Avro schema's opstellen
+ - Avro serialization gebruiken met Kafka
 
 Een Kafka broker houdt zich bezig met streaming van de events en doet zelf geen inspectie van de data die over de topics wordt verstuurd (geen CPU processing). Sterker nog Kafka pakt de streaming data, maar niet in memory (ZERO-COPY concept) en dit alles je raadt het al voor de snelheid!
 
@@ -10,10 +10,10 @@ Dus Kafka handelt in bytes-streams en past geen verificatie toe. Dit is uiteinde
 
 Als je binaire data tussen 2 partijen over de 'wire' wilt sturen (serializing/deserializing)  moet je beschrijven met een data format hoe je data types eruit zien (encoding/decoding). 
 
-Voorbeeld wij willen het getal '843' oversturen, als we in Kafka geen schema's gebruiken wordt alles omgezet naar String, dus het karakter '8' in utf-8 heeft standaard 2 bytes nodig, '4' nog een keer 2bytes en '3' nog een keer 2bytes, totaal 6 bytes. Met een dataformat geef je aan dit is een getal en 843 wordt dan in 1 Integer (16 bits), dus 2 bytes overgestuurd. Dit scheelt dus 4 bytes!
+Voorbeeld wij willen het getal '8431' oversturen, als we in Kafka geen schema's gebruiken wordt alles omgezet naar String, dus het karakter '8' in utf-8 heeft standaard 2 bytes nodig, enz dus totaal 8 bytes. Met een dataformat geef je aan dit is een getal en 843 wordt dan in 1 Integer (32 bits), dus 4 bytes overgestuurd. Dit scheelt dus 4 bytes!
 Als het volume of de grote van de berichten toenemen zie je de voordelen van het gebruik van encoding. 
 
-Binnen Kafka is gekozen voor AVRO. AVRO encoding is beschreven als een JSON schema, en heeft de volgende voordelen:
+Binnen Kafka is gekozen voor Avro. Avro encoding is beschreven als een JSON schema, en heeft de volgende voordelen:
 - Data is fully typed
 - Data is compressed 
 - Schema (JSON) komt met de data
@@ -21,7 +21,67 @@ Binnen Kafka is gekozen voor AVRO. AVRO encoding is beschreven als een JSON sche
 - Data language agnostic (geen harde binding met een bepaalde taal)
 - Schema evolution, mechanisme om veranderingen in de data toe te staan 
 
+## Avro Record Schema structuur
+Een Avro schema heeft een record structuur als volgt:
 
+    Name 
+    Namespace
+    Doc
+    Aliases
+    Fields
+       Name
+       Doc
+       Type
+
+voorbeeld:
+
+ {
+     "type": "record",
+     "namespace": "ai.axonx.workshop",
+     "name": "tweet",
+     "fields": [
+       { "name": "body", "type": "string" },
+       { "name": "id", "type": "int"}
+     ]
+ }
+
+Bovenstaande Avro Schema voorbeeld wordt als een file met extentie .avsc opgeslagen.
+
+ ## Avro Primitive Types
+
+We kennen de volgende types voor de fields elementen:
+
+    null : geen waarde
+    boolean
+    int  : 32 bits signed
+    long : 64 bits signed
+    float: 32 bits 
+    double : 64 bits
+    byte : 8 bits
+    string : unicode
+
+ ## Avro Complex Types
+  
+    enums  =>  { "name": "build_success", "type": "enum", "symbols": ["ROOD", "GROEN"] }
+    arrays =>  { "name": "relations", "type": "array", "items": "string" }
+    maps   =>  { "name": "hashmap", "type": "maps", "values": "string" }
+    unions =>  { "name": "tussenvoegsel", "type": ["null", "string"], "default": null }   
+    type is een ander schema (incl namespace)
+
+    **Let op:** default waarde type is gelijk aan eerste type union!
+
+## Logical Types
+
+    decimals (bytes)        : geld 
+    date (int)              : aantal dagen sinds 1970 
+    time-millis (long)      : millisec na midnight
+    timestamp-millis (long) : millisec sinds 1970
+
+Voorbeeld gebruik logical type voor onze tweets: 
+
+    {"name": "tijd_tweet", "type": "long", "logicalType": "timestamp-millis"}
+
+## Oefening 1
 
 
 
