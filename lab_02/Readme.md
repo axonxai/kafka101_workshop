@@ -1,6 +1,8 @@
 # Lab 2
 
-HEt wordt tijd voor 'echte data bronnen', we gaan aan de slag om van twitter tweets naar Kafka te sturen (topic twitter_tweets)
+Doel: Data ingestion van 'echte' bronnen (sources)
+
+Het wordt tijd voor koppelen met 'echte data bronnen', we gaan aan de slag om van twitter tweets naar Kafka te sturen (topic twitter_tweets)
 
 In de voorbereidingen hebt een account op twitter gemaakt, en ook een developer account aaangevraagd bij twitter, via de volgende URL: https://developer.twitter.com/content/developer-twitter/en.html
 
@@ -23,3 +25,5 @@ In onze kafka setup zit ook de Confluent Management Console, check via de browse
 In screendump zie je hoe je bij Topics de data stream kunt monitoren:
 
 ![image](img/lab02_check.png "check")
+
+Okay, we hebben nu genoeg data, stop het Java programa en ga door naar het volgende lab...
