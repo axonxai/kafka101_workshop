@@ -142,6 +142,53 @@ Nu met de consumer (inderect gebruik van het actuele schema) kunnen we alle beri
 
 ***Lessons Learned:***
 
+Binnen de evelutie van schema's kennen we 4 soorten:
+* Backward compatible  : we kunnen met het nieuwe schema v2 oude berichten van schema v1 lezen
+* Forward compatible   : we kunnen met het oude schema v1 de nieuwe berichten van schema v2 lezen
+* Full                 : Zowel Forward als Backward, dus berichten gemaakt onder schema's v1,v2 zijn te lezen met v1,v2 
+* Breaking             : geen, dus je breekt je data flow.
+
+Voorbeeld backward:
+Scenario je hebt alle consumer en producer op v2 schema's gezet, de consumers nu met v2 schema's kunnen de oude data nog lezen.
+
+    v1 schema: 
+    {"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"}]}    
+
+    v2 schema:
+    {"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int", "default": 0}]}
+
+    door default wordt in de oude v1 data, het telefoon nummer op 0 gezet
+
+Voorbeeld forward:
+Scenario je hebt alle producer op v2 schema's gezet, maar niet alle consumers kunnen direct over, er is een mix van v1,v2 consumer.
+
+    v1 schema: 
+    {"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"}]}    
+
+    v2 schema:
+    {"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int"]}
+
+    voor een v1 consumer is het mogelijk om de nieuwe v2 data te lezen. In dit geval wordt het telefoonnumer ignored.
+
+Voorbeeld Full, is eigenlijk geschetst in het backward scenario. Door defaults blijft het back als forward compatible.
+
+Voorbeeld Breaking, 
+
+v1 schema: 
+
+    {"type":"record","name":"myrecord","fields":[{"name":"id","type":"int"}]}    
+
+    v2 schema:
+    {"type":"record","name":"myrecord","fields":[{"name":"id","type":"string"}]}
+
+
+In de praktijk ga je voor FULL, met de volgende regels houd je 
+* primary key velden zijn verplicht (geen default)
+* default values voor alle velden die in de toekomst wellicht verdwijnen
+* Bij gebruik van enums geen veranderingen in id
+* Hernoem geen velden, gebruik een alias
+* Een opvolgend schema gberuikt voor nieuwe velden altijd defaults
+* In een opvolgend schema, delete nooit de required velden.
 
 
 ### ***Oefening 3 Kafka Avro Producer***
