@@ -83,7 +83,7 @@ Voorbeeld gebruik logical type voor onze tweets:
 
     {"name": "tijd_tweet", "type": "long", "logicalType": "timestamp-millis"}
 
-### Oefening 1 Maak een Avro schema
+### ***Oefening 1 Maak een Avro schema***
 
 Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
 
@@ -97,9 +97,21 @@ over te nemen in het avro schema en let op types!
 
 We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
 
+We gaan nu een uitbreiding van schema V1, dit doen we even in een aparte file zie in dezelfde directory.
+
+Voeg de volgende attributten toe:
+
+    lang
+    retweeted
+
+Maar, let op zorg er voor dat ze een default waarde hebben, bedenk zelf een logische default waarde.
+
+### ***Oefening 2 Backward, Forward, Full compatible schema changes***
 
 
-### Oefening 2 Kafka Avro Producer
+
+
+### ***Oefening 3 Kafka Avro Producer***
 
 Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
