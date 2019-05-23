@@ -83,7 +83,7 @@ Voorbeeld gebruik logical type voor onze tweets:
 
     {"name": "tijd_tweet", "type": "long", "logicalType": "timestamp-millis"}
 
-### Oefening 1 Maak een Avro schema
+### ***Oefening 1 Maak een Avro schema***
 
 Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
 
@@ -97,9 +97,54 @@ over te nemen in het avro schema en let op types!
 
 We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
 
+We gaan nu een uitbreiding van schema V1, dit doen we even in een aparte file zie in dezelfde directory.
+
+Voeg de volgende attributten toe:
+
+    lang
+    retweeted
+
+Maar, let op zorg er voor dat ze een default waarde hebben, bedenk zelf een logische default waarde.
+
+### ***Oefening 2 Backward, Forward, Full compatible schema changes***
+
+We hebben nu 2 schema's gemaakt maar zijn ze compatible? Hoe regel je dit eigenlijk? Verder waar vindt de validatie plaats?
+
+We beginnen bij validatie, open 2 terminals. Op de eerste terminal, tik en op de prompt kun je berichtjes naar het topic sturen:
+
+    $ kafka-avro-console-producer \
+    --broker-list <docker-ip-zie-lab01>:9092 --topic test-avro \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
+    --property value.schema='{"type":"record","name":"testing","fields":[{"name":"naam","type":"string"}]}'
+
+    > {"name": "Pietje Puk"}
+    > {"naam": "Pietje Puk"}
+    > {"name": 1000}
+
+Nu een schema evolutie, (er is dus per topic een current schema geldig):
+
+    $ kafka-avro-console-producer \
+    --broker-list l<docker-ip-zie-lab01>:9092 --topic test-avro \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
+    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int", "default": 0}]}'
+
+    > {"name": "bas", "telefoon": 1234567890 }
+    > {"name": "bas", "telefoon": "1234567890" }
+
+We hebben berichten op het topic 'test-avro' staan gemaakt onder de verschillende schema definities.
+
+Nu met de consumer (inderect gebruik van het actuele schema) kunnen we alle berichten bewonderen:
+
+    $ kafka-avro-console-consumer --topic test-avro \
+    --bootstrap-server <docker-ip-zie-lab01>:9092 \
+    --from-beginning \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081
+
+***Lessons Learned:***
 
 
-### Oefening 2 Kafka Avro Producer
+
+### ***Oefening 3 Kafka Avro Producer***
 
 Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
