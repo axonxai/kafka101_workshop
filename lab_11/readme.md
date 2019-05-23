@@ -1,14 +1,13 @@
 # LAB-10 (?) Chaos monkey spelen in een Kafka cluster
 
 We gaan een kijkje nemen naar hoe robuust een Kafka cluster is.
+Hier gebruiken we een andere docker-compose.yml, dus sluit eerst de vorige docker containers af door `docker-compose down` te gebruiken in de map cp-all-in-one.
 
-Start het Kafka cluster met 3 Zookeepers en 3 Kafka brokers op met 
+Start nu het Kafka cluster met 3 Zookeepers en 3 Kafka brokers op met 
 
     docker-compose up -d --build
 
-Mocht er een foutmelding komen kan je _alle docker containers_ even afsluiten met 
-
-    docker kill $(docker ps -q)
+Mocht er alsnog een foutmelding komen kan je _alle docker containers_ even afsluiten met `docker kill $(docker ps -q)` en het opnieuw proberen.
 
 Als je `docker ps` tikt krijg je als het goed is 3 Zookeepers en 3 Kafka brokers te zien
 
