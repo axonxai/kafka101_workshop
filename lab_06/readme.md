@@ -6,6 +6,11 @@ In dit lab gaan we aan de slag met KSQL, de query language van Confluent. Hierme
 start de ksql-cli
 ```ksql```
 
+Voordat je begint is het belangrijk dat je zorgt dat alle streams vanaf het begin van een topic gaan consumen.
+```sh
+$ SET 'auto.offset.reset'='earliest';
+```
+
 Om een stream te maken van het topic maken we een 1-op-1 kopie van het topic "trump_tweets". Wel maken we een stream met een gefilterd aantal attributen. 
 ```sh
 $ CREATE STREAM kstream_twitter_tweets
@@ -28,7 +33,6 @@ Als het goed is krijg je nu een melding "stream is created" of iets dergelijks.
 
 Om nu de inhoud van deze stream te bekijken, kun je via de ksql cli het volgende doen:
 ```sh
-$ SET 'auto.offset.reset'='earliest';
 $ SELECT * FROM kstream_twitter_tweets_enriched;
 ```
 
@@ -38,7 +42,7 @@ $ CREATE TABLE ktable_user_tweet_count AS
   SELECT user_name, COUNT(*) AS tweet_count
   FROM kstream_twitter_tweets_enriched 
   GROUP BY user_name;
-$ SELECT * from ktable_user_tweet_count;
+$ SELECT * FROM ktable_user_tweet_count;
 ```
 
 Dit gaan we nu uitbreiden omdat we alleen geïnteresseerd zijn in de meest actieve gebruikers op dit moment, dit doen we o.b.v. een tumbling window
@@ -61,7 +65,7 @@ Voor de overzichtelijkheid kun je natuurlijk nog zoiets toevoegen als `WHERE twe
 $ CREATE STREAM kstream_twitter_tweets_with_filter AS
 SELECT *
 FROM kstream_twitter_tweets_enriched
-WHERE text LIKE '% great %';
+WHERE text LIKE '% USA %';
 ```
 
 
