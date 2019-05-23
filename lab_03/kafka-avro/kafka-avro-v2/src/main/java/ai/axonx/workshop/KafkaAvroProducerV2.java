@@ -1,13 +1,13 @@
-package com.github.simplesteph.kafka.apps.v2;
+package ai.axonx.workshop;
 
-import com.example.Customer;
+import ai.axonx.workshop.TweetLikes;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
-public class KafkaAvroJavaProducerV2Demo {
+public class KafkaAvroProducerV2 {
 
     public static void main(String[] args) {
         Properties properties = new Properties();
@@ -20,26 +20,22 @@ public class KafkaAvroJavaProducerV2Demo {
         properties.setProperty("value.serializer", KafkaAvroSerializer.class.getName());
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
 
-        Producer<String, Customer> producer = new KafkaProducer<String, Customer>(properties);
+        Producer<String, TweetLikes> producer = new KafkaProducer<String, TweetLikes>(properties);
 
-        String topic = "customer-avro";
+        String topic = "avro-tweet";
 
         // copied from avro examples
-        Customer customer = Customer.newBuilder()
-                .setAge(34)
-                .setFirstName("John")
-                .setLastName("Doe")
-                .setHeight(178f)
-                .setWeight(75f)
-                .setEmail("john.doe@gmail.com")
-                .setPhoneNumber("(123)-456-7890")
+        TweetLikes tweetLikes = TweetLikes.newBuilder()
+                .setCreatedAt(12345678)
+                .setLiked(455)
+                .setText("tweet message")
                 .build();
 
-        ProducerRecord<String, Customer> producerRecord = new ProducerRecord<String, Customer>(
-                topic, customer
+        ProducerRecord<String, TweetLikes> producerRecord = new ProducerRecord<String, TweetLikes>(
+                topic, tweetLikes
         );
 
-        System.out.println(customer);
+        System.out.println(tweetLikes);
         producer.send(producerRecord, new Callback() {
             @Override
             public void onCompletion(RecordMetadata metadata, Exception exception) {
