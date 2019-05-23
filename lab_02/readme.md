@@ -1,14 +1,14 @@
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_03)
 
-# Lab-02 Data for real, Confluent Console 
+# LAB-02 Data for real, Confluent Console 
 
 Doel: Data ingestion van 'echte' bronnen (sources)
 
 Het wordt tijd voor koppelen met 'echte data bronnen', we gaan aan de slag om van twitter tweets naar Kafka te sturen (topic twitter_tweets)
 
-In de voorbereidingen hebt een account op twitter gemaakt, en ook een developer account aaangevraagd bij twitter, via de volgende URL: https://developer.twitter.com/content/developer-twitter/en.html
+In de voorbereidingen heb je als het goed is een account op twitter gemaakt, en ook een developer account aaangevraagd bij twitter, via de volgende URL: https://developer.twitter.com/content/developer-twitter/en.html
 
-Log in op de Dev link en maak een App aan, dit wordt ons java programma wat tweet via de API gaat uitlezen. Navigeer naar Credentials tab, zie screendump 
+Log in op de Dev link en maak een App aan, dit wordt ons java programma wat tweets via de API gaat uitlezen. Navigeer naar Credentials tab, zie screendump 
 
 ![image](img/lab02_cred_tw.png "credentials")
 

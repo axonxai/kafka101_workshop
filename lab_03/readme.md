@@ -1,19 +1,19 @@
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
 
-# LAB-03 intermezzo AVRO schema's, met Twitteren met AVRO Producers/Consumers
+# LAB-03 intermezzo Avro schema's, met Twitteren met Avro Producers/Consumers
 
-**Doel:** Handson met avro schema's voor event messaging
+**Doel:** Handson met Avro schema's voor event messaging
  - Avro schema's opstellen
  - Avro serialization gebruiken met Kafka
 
-Een Kafka broker houdt zich bezig met streaming van de events en doet zelf geen inspectie van de data die over de topics wordt verstuurd (geen CPU processing). Sterker nog Kafka pakt de streaming data, maar niet in memory (ZERO-COPY concept) en dit alles je raadt het al voor de snelheid!
+Een Kafka broker houdt zich bezig met streaming van de events en doet zelf geen inspectie van de data die over de topics wordt verstuurd (geen CPU processing). Sterker nog, Kafka pakt de streaming data, maar niet in memory (ZERO-COPY concept) en dit alles je raadt het al voor de snelheid!
 
 Dus Kafka handelt in bytes-streams en past geen verificatie toe. Dit is uiteindelijk wel wenselijk en kunnen we realiseren met de Kafka Registry, maar eerst even meer over de bytes-streams en schema's.
 
 Als je binaire data tussen 2 partijen over de 'wire' wilt sturen (serializing/deserializing)  moet je beschrijven met een data format hoe je data types eruit zien (encoding/decoding). 
 
 Voorbeeld wij willen het getal '8431' oversturen, als we in Kafka geen schema's gebruiken wordt alles omgezet naar String, dus het karakter '8' in utf-8 heeft standaard 2 bytes nodig, enz dus totaal 8 bytes. Met een dataformat geef je aan dit is een getal en 843 wordt dan in 1 Integer (32 bits), dus 4 bytes overgestuurd. Dit scheelt dus 4 bytes!
-Als het volume of de grote van de berichten toenemen zie je de voordelen van het gebruik van encoding. 
+Als het volume of de grootte van de berichten toenemen zie je de voordelen van het gebruik van slimme encoding. 
 
 Binnen Kafka is gekozen voor Avro. Avro encoding is beschreven als een JSON schema, en heeft de volgende voordelen:
 - Data is fully typed
@@ -47,9 +47,9 @@ voorbeeld:
         ]
     }
 
-Bovenstaande record voorbeeld noemen we een Avro Schema en wordt als een file met extentie .avsc opgeslagen.
+Bovenstaande record voorbeeld noemen we een Avro Schema en wordt als een file met extensie .avsc opgeslagen.
 
- ## Avro Primitive Types
+## Avro Primitive Types
 
 We kennen de volgende types voor de fields elementen:
 
@@ -62,7 +62,7 @@ We kennen de volgende types voor de fields elementen:
     byte : 8 bits
     string : unicode
 
- ## Avro Complex Types
+## Avro Complex Types
   
     enums  =>  { "name": "build_success", "type": "enum", "symbols": ["ROOD", "GROEN"] }
     arrays =>  { "name": "relations", "type": "array", "items": "string" }
@@ -87,64 +87,44 @@ Voorbeeld gebruik logical type voor onze tweets:
 
 Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
 
-Onder lab_03 in de directory 'avro-oefeningen' vind je een leeg schema 'tweet-likes-v1.avcs'. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
+Onder lab_03 in de directory avro-oefening1 vind je een leeg schema. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
 
     created_at
     text
     favorite_count
 
-over te nemen in het avro schema en let op de types!
+over te nemen in het avro schema en let op types!
 
-We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten. 
-
-De volgende stap is om een V2 versie te maken het schema, we slaan deze uitbreiding even apart op,
-
-
-
-
-
-
-
-
-## Kafka Registry
-
-
-
-
-
+We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
 
 
 
 ### Oefening 2 Kafka Avro Producer
 
-Spiek nog even in Lab_02 naar de Producer code, we gaan nu avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor avro
-
+Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
 
 
 ## Stappenplan voor de workshop
 
-## Stap 1
+### Stap 1
 
 Bepaal welke data we willen verwerken.
-Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is. 
+Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is.
 We willen minstens de tekst van de tweet zelf.
 
-## Stap 2
+### Stap 2
 
 Maak een syntactisch correct schema dat aan je wensen voldoet.
+Als het schema correct is genereert de `maven-avro-plugin` een Java class voor je.
+Met behulp van Gson kan je automagisch de JSON van een Tweet parseren naar de door Avro gegenereerde Java class.
 
-## Stap 3
+### Stap 3
 
-Maven build zodat `maven-avro-plugin` het werk voor je doet. 
-Verifieer je AVRO schema door met Gson een Tweet automagisch te parseren naar de door AVRO gegenereerde Java class.
-
-## Stap 4
-
-Vervang String serialization met AVRO serialization waar mogelijk:
+Vervang String serialization met Avro serialization waar mogelijk, dit is o.a. in:
 - KafkaProducer
 - Properties
-- KafkaConsumer, voor de liefhebbers
+- KafkaConsumer, voor de liefhebbers die het ook in actie willen zien
 
 # 'Inspiratie'
 

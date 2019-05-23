@@ -69,5 +69,5 @@ $ sqlite3 /data/kafka-workshop-lab_07.db
 $ INSERT INTO usa_synoniemen(word) VALUES('Noord-Amerika');
 ```
 
-Er is iets in de SQLite database toegegvoegd, Kafka-connect ziet de wijziging en in je consumer of in KSQL zie je dit nieuwe item nu verschijnen. 
+Er is iets in de SQLite database toegevoegd, Kafka-connect ziet de wijziging en in je consumer of in KSQL zie je dit nieuwe item nu verschijnen. 
 
