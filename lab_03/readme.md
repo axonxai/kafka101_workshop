@@ -108,6 +108,39 @@ Maar, let op zorg er voor dat ze een default waarde hebben, bedenk zelf een logi
 
 ### ***Oefening 2 Backward, Forward, Full compatible schema changes***
 
+We hebben nu 2 schema's gemaakt maar zijn ze compatible? Hoe regel je dit eigenlijk? Verder waar vindt de validatie plaats?
+
+We beginnen bij validatie, open 2 terminals. Op de eerste terminal, tik en op de prompt kun je berichtjes naar het topic sturen:
+
+    $ kafka-avro-console-producer \
+    --broker-list <docker-ip-zie-lab01>:9092 --topic test-avro \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
+    --property value.schema='{"type":"record","name":"testing","fields":[{"name":"naam","type":"string"}]}'
+
+    > {"name": "Pietje Puk"}
+    > {"naam": "Pietje Puk"}
+    > {"name": 1000}
+
+Nu een schema evolutie, (er is dus per topic een current schema geldig):
+
+    $ kafka-avro-console-producer \
+    --broker-list l<docker-ip-zie-lab01>:9092 --topic test-avro \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
+    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int", "default": 0}]}'
+
+    > {"name": "bas", "telefoon": 1234567890 }
+    > {"name": "bas", "telefoon": "1234567890" }
+
+We hebben berichten op het topic 'test-avro' staan gemaakt onder de verschillende schema definities.
+
+Nu met de consumer (inderect gebruik van het actuele schema) kunnen we alle berichten bewonderen:
+
+    $ kafka-avro-console-consumer --topic test-avro \
+    --bootstrap-server <docker-ip-zie-lab01>:9092 \
+    --from-beginning \
+    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081
+
+***Lessons Learned:***
 
 
 
