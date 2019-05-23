@@ -87,15 +87,31 @@ Voorbeeld gebruik logical type voor onze tweets:
 
 Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
 
-Onder lab_03 in de directory avro-oefening1 vind je een leeg schema. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
+Onder lab_03 in de directory 'avro-oefeningen' vind je een leeg schema 'tweet-likes-v1.avcs'. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
 
     created_at
     text
     favorite_count
 
-over te nemen in het avro schema en let op types!
+over te nemen in het avro schema en let op de types!
 
- We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
+We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten. 
+
+De volgende stap is om een V2 versie te maken het schema, we slaan deze uitbreiding even apart op,
+
+
+
+
+
+
+
+
+## Kafka Registry
+
+
+
+
+
 
 
 

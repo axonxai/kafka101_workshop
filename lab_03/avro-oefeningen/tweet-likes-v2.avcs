@@ -6,6 +6,7 @@
      "fields": [
        { "name": "created_at", "type": "long", "doc": "timestamp" },
        { "name": "text", "type": "string", "doc": "tweet message" },
-       { "name": "liked", "type": "int", "doc": "counter of loved tweet message" }
+       { "name": "liked", "type": "int", "doc": "counter of loved tweet message" },
+       {}
      ]  
 }
