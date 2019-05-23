@@ -124,7 +124,7 @@ We beginnen bij validatie, open 2 terminals. Op de eerste terminal, tik en op de
 Nu een schema evolutie, (er is dus per topic een current schema geldig):
 
     $ kafka-avro-console-producer \
-    --broker-list l<docker-ip-zie-lab01>:9092 --topic test-avro \
+    --broker-list <docker-ip-zie-lab01>:9092 --topic test-avro \
     --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
     --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int", "default": 0}]}'
 
@@ -195,45 +195,7 @@ In de praktijk ga je voor FULL, met de volgende regels houd je
 
 Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
+TODO: beschrijf lab
 
-
-## Stappenplan voor de workshop
-
-### Stap 1
-
-Bepaal welke data we willen verwerken.
-Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is.
-We willen minstens de tekst van de tweet zelf.
-
-### Stap 2
-
-Maak een syntactisch correct schema dat aan je wensen voldoet.
-Als het schema correct is genereert de `maven-avro-plugin` een Java class voor je.
-Met behulp van Gson kan je automagisch de JSON van een Tweet parseren naar de door Avro gegenereerde Java class.
-
-### Stap 3
-
-Vervang String serialization met Avro serialization waar mogelijk, dit is o.a. in:
-- KafkaProducer
-- Properties
-- KafkaConsumer, voor de liefhebbers die het ook in actie willen zien
-
-# 'Inspiratie'
-
-- In `twitter/src/main/avro` staan twee AVRO schema's, eentje met een simpele key-value structuur (nog geen map) en de ander als voorbeeld voor een Twitter bericht.
-- Maak een nieuw AVRO schema 'from scratch' of gebruik de voorbeeldschema's om een nieuw AVRO schema te maken.
-- in `twitter/pom.xml` zie je dat er vier dependencies zijn:
-    - org.apache.kafka kafka-clients
-    - com.google.code.gson gson
-    - org.apache.avro avro
-    - com.twitter hbc-core
-- Naast deze dependencies is de avro-maven-plugin ook benodigd om het project te bouwen, deze zal de AVRO schema's gebruiken om automagisch Java klassen te maken. Deze worden vervolgens gebruikt om met AVRO te serializen.
-- In `twitter/src/main/java/ai/axonx/kafkademo/` staan de `java` bestandjes, het leukste (en meest relevante voor de workshop) gebeurt in de TwitterProducer, deze neemt twitter berichten, filtert de twitter JSON aan de hand van het AVRO schema op enkele velden, en geeft deze door aan een Kafka broker. Voor de opdracht is het bijvoorbeeld interessant om deze Kafka berichten met AVRO serialization te laten sturen in plaats van met String serialization op JSON zoals nu het geval is.
-
-
-# Extra
-
-- Wat gebeurt er als je 'foute' berichten stuurt die niet in het schema passen?
-- Op welke manier(en) kan je omgaan met forward en backward compatibility?
 
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
