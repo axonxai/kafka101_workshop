@@ -11,8 +11,7 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 
-
-public class MyConsumer {
+public class ConsumerSolution {
 
     public static void main(String[] args) {
         String topic = "workshop";
@@ -28,20 +27,19 @@ public class MyConsumer {
         props.put("auto.commit.interval.ms", "200");
         props.put("auto.offset.reset", "earliest");
 
-
         props.put("key.deserializer", deserializer);
         props.put("value.deserializer", deserializer);
         props.put("key.serializer", serializer);
         props.put("value.serializer", serializer);
 
-
-        // TODO: Instantieer een KafkaConsumer
-        KafkaConsumer<String, String> consumer;
-
-        // TODO: Subscribe naar een topic
+        KafkaConsumer<String, String> myConsumer = new KafkaConsumer<>(props);
+        myConsumer.subscribe(Arrays.asList(topic));
 
         while (true) {
-            // TODO: Print de berichten naar stdout
+            ConsumerRecords<String, String> records = myConsumer.poll(100);
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.printf("offset = %d, key = %s, value = %s\n", record.offset(), record.key(), record.value());
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.Properties;
 /**
  * MyProducer Sends message to Kafka topic
  */
-public class MyProducer {
+public class ProducerSolution {
 
 
     public static void main(String[] args) throws InterruptedException {
