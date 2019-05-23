@@ -1,0 +1,16 @@
+{
+    "type": "record",
+    "namespace": "ai.axonx.workshop",
+    "name": "AvroDemo",
+    "version": "1",
+    "fields": [
+        {
+            "name": "key",
+            "type": "string"
+        },
+        {
+            "name": "value",
+            "type": "string"
+        }
+    ]
+}

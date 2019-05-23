@@ -1,0 +1,8 @@
+{
+     "type": "record",
+     "namespace": "ai.axonx.workshop",
+     "name": "TweetLikes",
+     "doc": "tweet liked messages",
+     "fields": [
+     ]
+}

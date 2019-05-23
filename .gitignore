@@ -1,5 +1,10 @@
 # Compiled class file
 *.class
+.settings
+.classpath
+.vscode
+.project
+.idea
 
 # Log file
 *.log
@@ -21,3 +26,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+.DS_Store
+._.DS_Store
+
+# extra protectie credentials niet op github
+./lab_02/kafka-producer-twitter/src/main/java/kafka/tutorial2/TwitterProducer.java
+
+target/
+.idea
+.vscode
+*.iml
+/bin

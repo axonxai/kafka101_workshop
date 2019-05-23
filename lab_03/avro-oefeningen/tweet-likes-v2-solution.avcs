@@ -1,0 +1,13 @@
+{
+     "type": "record",
+     "namespace": "ai.axonx.workshop",
+     "name": "TweetLikes",
+     "doc": "tweet liked messages",
+     "fields": [
+       { "name": "created_at", "type": "long", "doc": "timestamp" },
+       { "name": "text", "type": "string", "doc": "tweet message" },
+       { "name": "liked", "type": "int", "doc": "counter of loved tweet message" },
+       { "name": "retweet", "type": "boolean", "doc": "retweeted" },
+       { "name": "language", "type": "string", "doc": "language" }
+     ]  
+}
