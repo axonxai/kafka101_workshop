@@ -107,27 +107,24 @@ Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie
 
 ## Stappenplan voor de workshop
 
-## Stap 1
+### Stap 1
 
 Bepaal welke data we willen verwerken.
-Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is. 
+Aan de hand van een voorbeeld tweet (JSON) kunnen we verkennen welke data er beschikbaar is.
 We willen minstens de tekst van de tweet zelf.
 
-## Stap 2
+### Stap 2
 
 Maak een syntactisch correct schema dat aan je wensen voldoet.
+Als het schema correct is genereert de `maven-avro-plugin` een Java class voor je.
+Met behulp van Gson kan je automagisch de JSON van een Tweet parseren naar de door Avro gegenereerde Java class.
 
-## Stap 3
+### Stap 3
 
-Maven build zodat `maven-avro-plugin` het werk voor je doet. 
-Verifieer je AVRO schema door met Gson een Tweet automagisch te parseren naar de door AVRO gegenereerde Java class.
-
-## Stap 4
-
-Vervang String serialization met AVRO serialization waar mogelijk:
+Vervang String serialization met Avro serialization waar mogelijk, dit is o.a. in:
 - KafkaProducer
 - Properties
-- KafkaConsumer, voor de liefhebbers
+- KafkaConsumer, voor de liefhebbers die het ook in actie willen zien
 
 # 'Inspiratie'
 
