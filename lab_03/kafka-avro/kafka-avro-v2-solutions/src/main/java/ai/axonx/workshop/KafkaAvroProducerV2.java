@@ -1,6 +1,6 @@
 package ai.axonx.workshop;
 
-import ai.axonx.workshop.TweetLikes;
+import com.google.gson.Gson;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -8,6 +8,31 @@ import org.apache.kafka.common.serialization.StringSerializer;
 import java.util.Properties;
 
 public class KafkaAvroProducerV2 {
+
+    private static Gson gson = new Gson();
+
+    private static TweetLikes metGson(String tweet) {
+        TweetLikes fromJson = gson.fromJson(tweet, TweetLikes.class);
+        return fromJson;
+    }
+
+    /*
+     * met de builder moet je zelf ervoor zorgen dat de juiste informatie op de juiste plaats terecht komt
+     * dan heb je wel meer vrijheid in het ontwerpen van de Avro schema's, maar het kost meer moeite
+     */
+    private static TweetLikes metBuilder(String tweet) {
+        String user_name = "name";
+        String user_screenname = "alias";
+        boolean user_verified = false;
+        TweetLikes tweetLikes = TweetLikes.newBuilder()
+                .setUser(new user(user_name, user_screenname, user_verified))
+                .setTimestampMs(12345678)
+                .setFavoriteCount(455)
+                .setText("tweet message")
+                .build();
+
+        return tweetLikes;
+    }
 
     public static void main(String[] args) {
         Properties properties = new Properties();
@@ -24,12 +49,7 @@ public class KafkaAvroProducerV2 {
 
         String topic = "avro-tweet";
 
-        // copied from avro examples
-        TweetLikes tweetLikes = TweetLikes.newBuilder()
-                .setCreatedAt(12345678)
-                .setLiked(455)
-                .setText("tweet message")
-                .build();
+        TweetLikes tweetLikes = metGson("{}");
 
         ProducerRecord<String, TweetLikes> producerRecord = new ProducerRecord<String, TweetLikes>(
                 topic, tweetLikes
@@ -49,6 +69,5 @@ public class KafkaAvroProducerV2 {
 
         producer.flush();
         producer.close();
-
     }
 }

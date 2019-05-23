@@ -1,6 +1,5 @@
 package ai.axonx.workshop;
 
-import ai.axonx.workshop.TweetLikes;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,7 +14,7 @@ public class KafkaAvroConsumerV2 {
     public static void main(String[] args) {
         Properties properties = new Properties();
         // normal consumer
-        properties.setProperty("bootstrap.servers","127.0.0.1:9092");
+        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
         properties.put("group.id", "abc");
         properties.put("auto.commit.enable", "false");
         properties.put("auto.offset.reset", "earliest");
@@ -32,11 +31,11 @@ public class KafkaAvroConsumerV2 {
 
         System.out.println("Waiting for data...");
 
-        while (true){
+        while (true) {
             System.out.println("Polling");
             ConsumerRecords<String, TweetLikes> records = kafkaConsumer.poll(1000);
 
-            for (ConsumerRecord<String, TweetLikes> record : records){
+            for (ConsumerRecord<String, TweetLikes> record : records) {
                 TweetLikes tweetLikes = record.value();
                 System.out.println(tweetLikes);
             }
