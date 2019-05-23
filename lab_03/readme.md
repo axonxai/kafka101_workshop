@@ -1,19 +1,19 @@
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
 
-# LAB-03 intermezzo AVRO schema's, met Twitteren met AVRO Producers/Consumers
+# LAB-03 intermezzo Avro schema's, met Twitteren met Avro Producers/Consumers
 
-**Doel:** Handson met avro schema's voor event messaging
+**Doel:** Handson met Avro schema's voor event messaging
  - Avro schema's opstellen
  - Avro serialization gebruiken met Kafka
 
-Een Kafka broker houdt zich bezig met streaming van de events en doet zelf geen inspectie van de data die over de topics wordt verstuurd (geen CPU processing). Sterker nog Kafka pakt de streaming data, maar niet in memory (ZERO-COPY concept) en dit alles je raadt het al voor de snelheid!
+Een Kafka broker houdt zich bezig met streaming van de events en doet zelf geen inspectie van de data die over de topics wordt verstuurd (geen CPU processing). Sterker nog, Kafka pakt de streaming data, maar niet in memory (ZERO-COPY concept) en dit alles je raadt het al voor de snelheid!
 
 Dus Kafka handelt in bytes-streams en past geen verificatie toe. Dit is uiteindelijk wel wenselijk en kunnen we realiseren met de Kafka Registry, maar eerst even meer over de bytes-streams en schema's.
 
 Als je binaire data tussen 2 partijen over de 'wire' wilt sturen (serializing/deserializing)  moet je beschrijven met een data format hoe je data types eruit zien (encoding/decoding). 
 
 Voorbeeld wij willen het getal '8431' oversturen, als we in Kafka geen schema's gebruiken wordt alles omgezet naar String, dus het karakter '8' in utf-8 heeft standaard 2 bytes nodig, enz dus totaal 8 bytes. Met een dataformat geef je aan dit is een getal en 843 wordt dan in 1 Integer (32 bits), dus 4 bytes overgestuurd. Dit scheelt dus 4 bytes!
-Als het volume of de grote van de berichten toenemen zie je de voordelen van het gebruik van encoding. 
+Als het volume of de grootte van de berichten toenemen zie je de voordelen van het gebruik van slimme encoding. 
 
 Binnen Kafka is gekozen voor Avro. Avro encoding is beschreven als een JSON schema, en heeft de volgende voordelen:
 - Data is fully typed
@@ -47,9 +47,9 @@ voorbeeld:
         ]
     }
 
-Bovenstaande record voorbeeld noemen we een Avro Schema en wordt als een file met extentie .avsc opgeslagen.
+Bovenstaande record voorbeeld noemen we een Avro Schema en wordt als een file met extensie .avsc opgeslagen.
 
- ## Avro Primitive Types
+## Avro Primitive Types
 
 We kennen de volgende types voor de fields elementen:
 
@@ -62,7 +62,7 @@ We kennen de volgende types voor de fields elementen:
     byte : 8 bits
     string : unicode
 
- ## Avro Complex Types
+## Avro Complex Types
   
     enums  =>  { "name": "build_success", "type": "enum", "symbols": ["ROOD", "GROEN"] }
     arrays =>  { "name": "relations", "type": "array", "items": "string" }
@@ -95,14 +95,13 @@ Onder lab_03 in de directory avro-oefening1 vind je een leeg schema. Vul dit Avr
 
 over te nemen in het avro schema en let op types!
 
- We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
+We zullen dit nu onze V1 (version 1) noemen van onze Tweet Stream berichten.
 
 
 
 ### Oefening 2 Kafka Avro Producer
 
-Spiek nog even in Lab_02 naar de Producer code, we gaan nu avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor avro
-
+Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
 
 
