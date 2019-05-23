@@ -37,15 +37,21 @@ public class MyProducer {
         props.put("value.serializer", serializer);
 
 
-        // TODO: Instantieer een KafkaProducer
-        KafkaProducer<String, String> producer;
+        KafkaProducer<String, String> producer = new KafkaProducer<>(props);
 
         while (true) {
-            // TODO: zorg ervoor dat de producer een berichtje verstuurt
             String message = new Date().toString();
-            // Jouw code hier
-            
-            // Einde code
+            ProducerRecord<String, String> record = new ProducerRecord<String, String>(topic,"msg " + message);
+            producer.send(record, new Callback() {
+                @Override
+                public void onCompletion(RecordMetadata metadata, Exception exception) {
+                    if (exception == null) {
+                        System.out.println("topic offset " + metadata.offset());
+                    } else {
+                        exception.printStackTrace();
+                    }
+                }
+            });
             Thread.sleep(sleepSeconds * 1000);
         }
     }
