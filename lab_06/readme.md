@@ -59,7 +59,7 @@ $ CREATE TABLE ktable_user_tweet_count AS
 Voor de overzichtelijkheid kun je natuurlijk nog zoiets toevoegen als `WHERE tweet_count > 3`
 
 
-## Let's make the Filter "great"
+## Let's make the Filter "great" again
 
 ```sh
 $ CREATE STREAM kstream_twitter_tweets_with_filter AS
@@ -68,9 +68,7 @@ FROM kstream_twitter_tweets_enriched
 WHERE text LIKE '% USA %';
 ```
 
-
-## We willen weten welke actieve users bepaalde woorden tweeten - Join - 
-### DIT WERKT NOG NIET
+## OPDRACHT - We willen weten welke actieve users bepaalde woorden tweeten - Doe dit mbv een join tussen een stream en een table 
 
 ```sh
 $ CREATE STREAM kstream_twitter_tweets_with_filter_activeusers AS
