@@ -1,6 +1,6 @@
 package ai.axonx.workshop;
 
-//import ai.axonx.workshop.TweetLikes;
+import ai.axonx.workshop.TweetLikes;
 import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -15,7 +15,7 @@ public class KafkaAvroConsumerV1 {
     public static void main(String[] args) {
         Properties properties = new Properties();
         // normal consumer
-        properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
+        properties.setProperty("bootstrap.servers","127.0.0.1:9092");
         properties.put("group.id", "abc");
         properties.put("auto.commit.enable", "false");
         properties.put("auto.offset.reset", "earliest");
@@ -26,22 +26,22 @@ public class KafkaAvroConsumerV1 {
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
         properties.setProperty("specific.avro.reader", "true");
 
-//        KafkaConsumer<String, TweetLikes> kafkaConsumer = new KafkaConsumer<>(properties);
-//        String topic = "avro-tweet";
-//        kafkaConsumer.subscribe(Collections.singleton(topic));
-//
-//        System.out.println("Waiting for data...");
-//
-//        while (true){
-//            System.out.println("Polling");
-//            ConsumerRecords<String, TweetLikes> records = kafkaConsumer.poll(1000);
-//
-//            for (ConsumerRecord<String, TweetLikes> record : records){
-//                TweetLikes tweetLikes = record.value();
-//                System.out.println(tweetLikes);
-//            }
-//
-//            kafkaConsumer.commitSync();
-//        }
+        KafkaConsumer<String, TweetLikes> kafkaConsumer = new KafkaConsumer<>(properties);
+        String topic = "avro-tweet";
+        kafkaConsumer.subscribe(Collections.singleton(topic));
+
+        System.out.println("Waiting for data...");
+
+        while (true){
+            System.out.println("Polling");
+            ConsumerRecords<String, TweetLikes> records = kafkaConsumer.poll(1000);
+
+            for (ConsumerRecord<String, TweetLikes> record : records){
+                TweetLikes tweetLikes = record.value();
+                System.out.println(tweetLikes);
+            }
+
+            kafkaConsumer.commitSync();
+        }
     }
 }
