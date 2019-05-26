@@ -2,7 +2,7 @@
 
 Welkom op de Kafka 101 Workshop,
 
-De doel van deze workshop is om snel hands-on aan de slag te kunnen gaan met Kafka voor starters met Kafka. In de workshop zullen we key components van een Kafka architectuur de revue laten passeren in de een serie van labs. De labs kunnen afzonderlijk gedaan worden, alhoewel er wel een rode draad in het verhaal zit.
+Het doel van deze workshop is om snel hands-on aan de slag te kunnen gaan met Kafka voor starters. In de workshop zullen we key components van een Kafka architectuur de revue laten passeren in de een serie van labs. De labs kunnen afzonderlijk gedaan worden, alhoewel er wel een rode draad in het verhaal zit.
 
 *Inhoud van de labs:*
 1. ✅ Hello-world producer en consumer 
