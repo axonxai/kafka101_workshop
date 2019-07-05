@@ -1,4 +1,4 @@
-[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_06)
 
 # LAB-03 intermezzo Avro schema's, met Twitteren met Avro Producers/Consumers
 
@@ -198,4 +198,4 @@ Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie
 TODO: beschrijf lab
 
 
-[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_06)
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_06)

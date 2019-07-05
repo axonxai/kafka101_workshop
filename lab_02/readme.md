@@ -1,4 +1,4 @@
-[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_03)
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_03)
 
 # LAB-02 Data for real, Confluent Console 
 
@@ -31,6 +31,6 @@ In screendump zie je hoe je bij Topics de data stream kunt monitoren:
 Okay, we hebben nu genoeg data, stop het Java programa en ga door naar het volgende lab...
 
 
-[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_03)
+[Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_01) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_03)
 
  
