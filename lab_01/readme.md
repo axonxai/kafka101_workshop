@@ -1,4 +1,4 @@
-[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
+[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02)
 
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
@@ -9,8 +9,10 @@ Clone deze git-repo:
     $ git clone git@github.com:axonxai/kafka101_workshop.git
 
 of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.zip
-    
-We beginnen met het starten van onze Kafka setup, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
+
+Voordat we beginnen is het belangrijk dat we de docker configuratie nagaan. Als Docker draait dan kan je deze bij Windows vinden in de "Notification Area" en bij Mac op de "Menu Bar", hier kan je de settings/preferences vinden. Zorg ervoor dat het toegewezen geheugen minimaal 6GB is en dat je ervoor zorgt dat er in ieder geval 1 disk gedeeld is. 
+
+Nu beginnen we met het starten van onze Kafka setup, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
 
     $ cd cp-all-in-one
     $ docker-compose up
@@ -70,7 +72,7 @@ We hebben nu de standaard Kafka tooling gebruikt om berichten te sturen en uit t
 
 ## Let's code: een Producer in Java
 
-Open je favoriete editor en importeer de producer-directory,
+Open je favoriete IDE en importeer de producer-directory,
 
 Gebruik voor de oefeningen de JavaDocs van Confluent Kafka: https://kafka.apache.org/0100/javadoc/index.html?index-all.html
 

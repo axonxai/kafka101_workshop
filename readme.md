@@ -23,7 +23,7 @@ De axonX crew
 
 
 # Voorbereiding / installaties
--   Git
+-   Git (zorg voor een up to date versie ivm certificaten)
 -   Docker
 -   [Java minimal JDK8](https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html?printOnly=1)
 -   Maven
