@@ -24,10 +24,11 @@ De axonX crew
 
 # Voorbereiding / installaties
 -   Git (zorg voor een up to date versie ivm certificaten)
--   Docker
+-   Docker (1.11 of nieuwer)
 -   [Java minimal JDK8](https://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html?printOnly=1)
 -   Maven
 -   Your favourite IDE (visual code, intelij, sublime, atom, …)
 -   [Dev account op Twitter](https://developer.twitter.com/) 
 -   Install sqlite 
+-	Doorloop [Voorbereiding](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/voorbereiding)
 

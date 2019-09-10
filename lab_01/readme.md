@@ -4,39 +4,9 @@
 
 **Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
 
-Clone deze git-repo:
+De asumptie is dat je de voorbereiding hebt gevolgd; de volgende stap is het achterhalen van het gateway IP adres (docker host ip).
 
-    $ git clone git@github.com:axonxai/kafka101_workshop.git
-
-of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.zip
-
-Voordat we beginnen is het belangrijk dat we de docker configuratie nagaan. Als Docker draait dan kan je deze bij Windows vinden in de "Notification Area" en bij Mac op de "Menu Bar", hier kan je de settings/preferences vinden. Zorg ervoor dat het toegewezen geheugen minimaal 6GB is en dat je ervoor zorgt dat er in ieder geval 1 disk gedeeld is. 
-
-Nu beginnen we met het starten van onze Kafka setup, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
-
-    $ cd cp-all-in-one
-    $ docker-compose up
-
-Je ziet een hoop gepruttel, dit is goed :) Laat de terminal met rust en open een andere terminal waar je mee verder gaat!
-
-Controleer of je ongeveer dezelfde output ziet als hieronder met het volgende docker commando
-
-    $ docker ps
-
-    CONTAINER ID        IMAGE                                             COMMAND                  CREATED             STATUS              PORTS                                              NAMES
-    cdf381c63565        confluentinc/cp-enterprise-control-center:5.2.1   "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:9021->9021/tcp                             control-center
-    03b85067d06f        confluentinc/cp-ksql-cli:5.2.1                    "/bin/sh"                3 days ago          Up 2 minutes                                                           ksql-cli
-    b4e2cabcafc2        confluentinc/ksql-examples:5.1.2                  "bash -c 'echo Waiti…"   3 days ago          Up 2 minutes                                                           ksql-datagen
-    21b2f105787f        confluentinc/cp-ksql-server:5.2.1                 "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8088->8088/tcp                             ksql-server
-    0ccfcca6434c        confluentinc/cp-kafka-rest:5.2.1                  "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8082->8082/tcp                             rest-proxy
-    3eecab329713        confluentinc/kafka-connect-datagen:latest         "bash -c 'if [ ! -d …"   3 days ago          Up 2 minutes        0.0.0.0:8083->8083/tcp, 9092/tcp                   connect
-    6b03d0385e7f        confluentinc/cp-schema-registry:5.2.1             "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:8081->8081/tcp                             schema-registry
-    5f6603ae7ff0        confluentinc/cp-enterprise-kafka:5.2.1            "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:9092->9092/tcp, 0.0.0.0:29092->29092/tcp   broker
-    87d4ea06496e        confluentinc/cp-zookeeper:5.2.1                   "/etc/confluent/dock…"   3 days ago          Up 3 minutes        2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp         zookeeper
-
-We moeten nu het gateway IP adres (docker host ip) achterhalen
-
-    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
+    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:x.x.x >
 
 ```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
 
