@@ -1,6 +1,6 @@
 @echo off
 
-for /f %%i in ('docker ps ^| findstr cp-ksql-cli') do set container-id=%%i
+for /f %%i in ('docker ps ^| findstr ksql-cli') do set container-id=%%i
 echo %container-id%
 
 set ksql-args=%1 %2 %3 %4 %5 %6 %7 %8 %9

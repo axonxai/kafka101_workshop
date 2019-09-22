@@ -13,17 +13,21 @@ De asumptie is dat je de voorbereiding hebt gevolgd; de volgende stap is het ach
 ## Berichten sturen met de CLI
 
 Ondanks dat Kafka default staat ingesteld om automatisch een topic aan te maken indien die nog ontbreekt, is het een 'best practice' om topic klaar te zetten, je hebt dan de mogelijkheid om je replicatie en andere properties in te stellen per topic.
+Omdat we alles in docker draaien betekent dit ook dat onze commandline commando's zich daar bevinden. Om dit  makkelijker te maken is er een mapje met wrappers (voor windows en *nix). Om een kafka commando uit te voeren kan je in dat mapje staan en elk commando prefixen met ./. Bijvoorbeeld ./kafka-topics .
 
 ### Een topic creëren, doen we op de volgende manier
-    $ kafka-topics --zookeeper <ip-adres>:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
+
+Omdat we met docker werken moeten in plaats van het <ip-adres> de hostnaam gebruiken, voor zookeeper is dat zookeeper
+    $ kafka-topics --zookeeper zookeeper:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
 
 Als het goed is zie je nu je aangemaakte topic (met een hoop al bestaande internal topic):
 
-    $ kafka-topics --zookeeper <ip-adres>:2181 --list
+    $ kafka-topics --zookeeper zookeeper:2181 --list
 
 ### Een bericht sturen
 
-    $ kafka-console-producer --broker-list <ip-adres>:9092 --topic hello_world
+Omdat we met docker werken moeten in plaats van het <ip-adres> de hostnaam gebruiken, voor de broker is dat broker
+    $ kafka-console-producer --broker-list broker:29092 --topic hello_world
     > hallo
 
 Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en zolang je niet op <ctrl>-c drukt blijf je berichten sturen.
@@ -31,7 +35,7 @@ Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en z
 ### Een bericht bekijken
 Open nu een nieuwe terminal en start een consumer met:
 
-    $ kafka-console-consumer --bootstrap-server <ip-adres>:9092 --topic hello_world
+    $ kafka-console-consumer --bootstrap-server broker:29092 --topic hello_world
 
 Nu kun je het topic uitlezen en komen hier nieuwe berichten voorbij. 
 Als je alle berichten wilt zien voeg je `--from-beginning` toe aan het commando. 
