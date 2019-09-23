@@ -46,7 +46,7 @@ We hebben nu de standaard Kafka tooling gebruikt om berichten te sturen en uit t
 
 ## Let's code: een Producer in Java
 
-Open je favoriete IDE en importeer de producer-directory,
+Open je favoriete IDE en importeer de producer-directory (indien nodig als een maven project),
 
 Gebruik voor de oefeningen de JavaDocs van Confluent Kafka: https://kafka.apache.org/0100/javadoc/index.html?index-all.html
 
