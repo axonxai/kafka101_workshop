@@ -10,46 +10,17 @@
         },
         {
             "name": "user",
-            "type": {
+            "type": [{
                 "name": "user",
                 "type": "record",
                 "fields": [
                     {
                         "name": "name",
-                        "type": "string"
-                    },
-                    {
-                        "name": "screen_name",
-                        "type": "string"
-                    },
-                    {
-                        "name": "verified",
-                        "type": "boolean"
+                        "type": ["null", "string"]
                     }
                 ]
-            }
-        },
-        {
-            "name": "retweeted_status",
-            "type": {
-                "name": "retweeted_status",
-                "type": "record",
-                "fields": [
-                    {
-                        "name": "extended_tweet",
-                        "type": {
-                            "name": "extended_tweet",
-                            "type": "record",
-                            "fields": [
-                                {
-                                    "name": "full_text",
-                                    "type": "string"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            }
+            }, "null"
+			]
         }
     ]
 }

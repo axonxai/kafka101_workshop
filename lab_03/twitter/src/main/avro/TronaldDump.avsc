@@ -1,0 +1,176 @@
+{
+    "type": "record",
+    "namespace": "ai.axonx.workshop",
+    "name": "TronaldDump",
+    "version": "1",
+    "fields": [
+        {
+            "name": "count",
+            "type": "int"
+        },
+        {
+            "name": "total",
+            "type": "int"
+        },
+        {
+            "name": "_embedded",
+            "type": {
+                "name": "_embedded1",
+                "type": "record",
+                "fields": [
+                    {
+                        "name": "quotes",
+                        "type": {
+                            "type": "array",
+                            "items": {
+                                "name": "quotes_record",
+                                "type": "record",
+                                "fields": [
+                                    {
+                                        "name": "appeared_at",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "created_at",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "quote_id",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "tags",
+                                        "type": {
+                                            "type": "array",
+                                            "items": "string"
+                                        }
+                                    },
+                                    {
+                                        "name": "updated_at",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "value",
+                                        "type": "string"
+                                    },
+                                    {
+                                        "name": "_links",
+                                        "type": {
+                                            "name": "_links",
+                                            "type": "record",
+                                            "fields": [
+                                                {
+                                                    "name": "self",
+                                                    "type": {
+                                                        "name": "self",
+                                                        "type": "record",
+                                                        "fields": [
+                                                            {
+                                                                "name": "href",
+                                                                "type": "string"
+                                                            }
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "_embedded",
+                                        "type": {
+                                            "name": "_embedded2",
+                                            "type": "record",
+                                            "fields": [
+                                                {
+                                                    "name": "author",
+                                                    "type": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "name": "author_record",
+                                                            "type": "record",
+                                                            "fields": [
+                                                                {
+                                                                    "name": "created_at",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "bio",
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "author_id",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "name",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "slug",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "updated_at",
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                },
+                                                {
+                                                    "name": "source",
+                                                    "type": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "name": "source_record",
+                                                            "type": "record",
+                                                            "fields": [
+                                                                {
+                                                                    "name": "created_at",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "filename",
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "quote_source_id",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "remarks",
+                                                                    "type": [
+                                                                        "string",
+                                                                        "null"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "updated_at",
+                                                                    "type": "string"
+                                                                },
+                                                                {
+                                                                    "name": "url",
+                                                                    "type": "string"
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -87,7 +87,7 @@ Voorbeeld gebruik logical type voor onze tweets:
 
 Check Tweet Object op: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object.html
 
-Onder lab_03 in de directory avro-oefening1 vind je een leeg schema. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
+Onder lab_03 in de directory avro-oefeningen vind je het "tweet-likes-v1.avcs" schema. Vul dit Avro schema aan, gebruik uit het orginele Tweet Object de volgende attributten:
 
     created_at
     text
@@ -113,32 +113,34 @@ We hebben nu 2 schema's gemaakt maar zijn ze compatible? Hoe regel je dit eigenl
 We beginnen bij validatie, open 2 terminals. Op de eerste terminal, tik en op de prompt kun je berichtjes naar het topic sturen:
 
     $ kafka-avro-console-producer \
-    --broker-list <docker-ip-zie-lab01>:9092 --topic test-avro \
-    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
+    --broker-list broker:29092 --topic test-avro \
+    --property schema.registry.url=http://schema-registry:8081 \
     --property value.schema='{"type":"record","name":"testing","fields":[{"name":"naam","type":"string"}]}'
 
     > {"name": "Pietje Puk"}
     > {"naam": "Pietje Puk"}
-    > {"name": 1000}
+    > {"naam": 1000}
 
-Nu een schema evolutie, (er is dus per topic een current schema geldig):
+Zoals je ziet gaat alleen het tweede bericht goed. Het eerste bericht bevat niet het naam element en het derde bericht heeft als waarde een integer terwijl een string wordt verwacht.
+
+Nu een schema evolutie, voer het volgende in de tweede terminal uit, (er is dus per topic een current schema geldig):
 
     $ kafka-avro-console-producer \
-    --broker-list <docker-ip-zie-lab01>:9092 --topic test-avro \
-    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081 \
-    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name": "telefoon", "type": "int", "default": 0}]}'
+    --broker-list broker:29092 --topic test-avro \
+    --property schema.registry.url=http://schema-registry:8081 \
+    --property value.schema='{"type":"record","name":"myrecord","fields":[{"name":"naam","type":"string"},{"name":"telefoon","type":"int","default":0}]}'
 
-    > {"name": "bas", "telefoon": 1234567890 }
-    > {"name": "bas", "telefoon": "1234567890" }
+    > {"naam": "bas", "telefoon": 1234567890 }
+    > {"naam": "bas", "telefoon": "1234567890" }
 
 We hebben berichten op het topic 'test-avro' staan gemaakt onder de verschillende schema definities.
 
 Nu met de consumer (inderect gebruik van het actuele schema) kunnen we alle berichten bewonderen:
 
     $ kafka-avro-console-consumer --topic test-avro \
-    --bootstrap-server <docker-ip-zie-lab01>:9092 \
+    --bootstrap-server broker:29092 \
     --from-beginning \
-    --property schema.registry.url=http://<docker-ip-zie-lab01>:8081
+    --property schema.registry.url=http://schema-registry:8081
 
 ***Lessons Learned:***
 
@@ -196,6 +198,7 @@ In de praktijk ga je voor FULL, met de volgende regels houd je
 Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
 
 TODO: beschrijf lab
+Bekijk de example_data.json en bepaal aan de hand van die data wat voor extra data je zelf wil toevoegen aan het AvroTweet.avsc afro schema.
 
 
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_06)

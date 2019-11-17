@@ -6,11 +6,11 @@
     "fields": [
         {
             "name": "text",
-            "type": ["null", "string"]
+            "type": "string"
         },
         {
             "name": "user",
-            "type": {
+            "type": [{
                 "name": "user",
                 "type": "record",
                 "fields": [
@@ -19,37 +19,30 @@
                         "type": ["null", "string"]
                     },
                     {
-                        "name": "screen_name",
+                        "name": "date",
                         "type": ["null", "string"]
                     },
                     {
-                        "name": "verified",
-                        "type": ["null", "boolean"]
+                        "name": "url",
+                        "type": ["null", "string"]
                     }
                 ]
-            }
+            }, "null"
+			]
         },
         {
-            "name": "retweeted_status",
-            "type": ["null", {
-                "name": "retweeted_status",
+            "name": "tags",
+            "type": [{
+                "name": "tags",
                 "type": "record",
                 "fields": [
                     {
-                        "name": "extended_tweet",
-                        "type": ["null", {
-                            "name": "extended_tweet",
-                            "type": "record",
-                            "fields": [
-                                {
-                                    "name": "full_text",
-                                    "type": "string"
-                                }
-                            ]
-                        }]
+                        "name": "name",
+                        "type": ["null", "string"]
                     }
                 ]
-            }]
+            }, "null"
+			]
         }
     ]
 }
