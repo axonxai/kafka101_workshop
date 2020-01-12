@@ -4,7 +4,7 @@ In dit lab gaan we aan de slag met KSQL, de query language van Confluent. Hierme
 ## Een overzicht van de actiefste users
 
 start de ksql-cli
-```ksql```
+```ksql http://ksql-server:8088```
 
 Voordat je begint is het belangrijk dat je zorgt dat alle streams vanaf het begin van een topic gaan consumen.
 ```sh
@@ -22,6 +22,14 @@ $ CREATE STREAM kstream_twitter_tweets
         followers_count INTEGER>, 
     text VARCHAR) 
     WITH (KAFKA_TOPIC='twitter_tweets',  VALUE_FORMAT='JSON');
+
+$ CREATE STREAM kstream_trump_hillary_tweets
+    (created_at VARCHAR, 
+    id BIGINT,
+    user STRUCT <
+        name VARCHAR>, 
+    text VARCHAR) 
+    WITH (KAFKA_TOPIC='hillary',  VALUE_FORMAT='AVRO');
 
 # create an enriched stream with user_name
 $ CREATE STREAM kstream_twitter_tweets_enriched AS
