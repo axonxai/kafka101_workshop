@@ -24,13 +24,17 @@ public class DemoProperties {
 
         // Serializers
         // KafkaAvroSerializer -- KafkaAvroDeserializer
-        String serializer = StringSerializer.class.getName();
-        String deserializer = StringDeserializer.class.getName();
-        properties.put("key.deserializer", deserializer);
-        properties.put("value.deserializer", deserializer);
-        properties.put("key.serializer", serializer);
-        properties.put("value.serializer", serializer);
-//        properties.put("schema.registry.url", "");
+        String stringSerializer = StringSerializer.class.getName();
+        String stringDeserializer = StringDeserializer.class.getName();
+        String kafkaSerializer = KafkaAvroSerializer.class.getName();
+        String kafkaDeserializer = KafkaAvroDeserializer.class.getName();
+        properties.put("key.deserializer", stringDeserializer);
+        properties.put("value.deserializer", kafkaDeserializer);
+        properties.put("key.serializer", stringSerializer);
+        properties.put("value.serializer", kafkaSerializer);
+        properties.put("schema.registry.url", "http://localhost:8081");
+        //properties.put("schema.registry.url", "http://schema-registry:8081");
+
         return properties;
     }
 }

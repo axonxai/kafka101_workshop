@@ -1,25 +1,25 @@
 package ai.axonx.workshop;
 
+import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.twitter.hbc.ClientBuilder;
-import com.twitter.hbc.core.Client;
-import com.twitter.hbc.core.Constants;
-import com.twitter.hbc.core.Hosts;
-import com.twitter.hbc.core.HttpHosts;
-import com.twitter.hbc.core.endpoint.StatusesFilterEndpoint;
-import com.twitter.hbc.core.processor.StringDelimitedProcessor;
-import com.twitter.hbc.httpclient.auth.Authentication;
-import com.twitter.hbc.httpclient.auth.OAuth1;
-import java.util.List;
-import java.util.Properties;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import javafx.util.Pair;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+
+import javax.ws.rs.client.Invocation;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
 
 /**
  *
@@ -28,13 +28,11 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 public class TwitterProducer {
 
     private static Properties properties;
-    private static KafkaProducer<String, String> producer;
+    private static KafkaProducer<String, AvroTweet> producer;
 
-    private static Client client;
     private static List<String> terms;
     private static BlockingQueue<String> msgQueue;
 
-    private static Thread thread;
 
     public static void init(List<String> topics, String brokers) {
 
@@ -44,85 +42,97 @@ public class TwitterProducer {
         properties = DemoProperties.getProperties(brokers);
         producer = new KafkaProducer<>(properties);
 
-        Hosts hosts = new HttpHosts(Constants.STREAM_HOST);
-        StatusesFilterEndpoint endpoint = new StatusesFilterEndpoint();
+        // Create a hasmap for tweets concerning certain topics
+        Map<String, ArrayList<ai.axonx.workshop.quotes_record>> searchTweets = new HashMap<>();
+        ArrayList<ai.axonx.workshop.quotes_record> tweets;
 
-        endpoint.trackTerms(terms);
+        // Search all serach terms and read twitter posts
+        for (String term : terms) {
+            System.out.println("Search for " + term + " in Trumps tweets.");
+            tweets = new ArrayList<>();
+            ReadTwitterPost(term, 1, tweets);
+            searchTweets.put(term, tweets);
+        }
 
-        // Let op dat de credentials ingevuld worden
-        Authentication auth = new OAuth1(
-                TwitterCredentials.consumerKey,
-                TwitterCredentials.consumerSecret,
-                TwitterCredentials.token,
-                TwitterCredentials.secret);
+        System.out.println("Done fetching tweets");
 
-        ClientBuilder builder = new ClientBuilder()
-                .hosts(hosts)
-                .authentication(auth)
-                .endpoint(endpoint)
-                .processor(new StringDelimitedProcessor(msgQueue));
+        for (Map.Entry<String, ArrayList<ai.axonx.workshop.quotes_record>> entry : searchTweets.entrySet()) {
+            String searchTerm = entry.getKey();
 
-        client = builder.build();
-        client.connect();
+            int key = 0;
+            for (ai.axonx.workshop.quotes_record tweet : entry.getValue()) {
+                AvroTweet avroTweet;
+                // try {
 
-        // Het is netter om hier een aparte class voor te maken
-        thread = new Thread() {
-            @Override
-            public void run() {
-                // Topic aanpassen aan de hand van zoektermen
-                String topic = "twitter";
-                topic = terms.stream().map((term) -> "-" + term).reduce(topic, String::concat);
-                String tweet = null;
-                int key = 0;
-                Gson gson = new Gson();
+                avroTweet = new AvroTweet();
 
-                while (true) {
-                    try {
-                        tweet = msgQueue.poll(5, TimeUnit.SECONDS);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(TwitterProducer.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                // Put values in our avrotweet
+                ai.axonx.workshop.user user = new user();
+                user.put("name", tweet.getEmbedded$1().getAuthor().get(0).getName());
 
-                    if (tweet != null) {
-                        System.out.println(String.format("polled tweet=%s\n", tweet));
+                avroTweet.put("text", tweet.getValue());
+                avroTweet.put("user",user);
 
-                        AvroTweet value;
-                        try {
-                            value = gson.fromJson(tweet, AvroTweet.class);
+                // Add some extra fields to the avro schema
+                // Think about date, perhaps some more info about the user (in this case Donald Trump)
+                // You could also perhaps add some data about his target of interest (tags)
+                // Check the example json for ideas
 
-                            try {
-                                // Momenteel gebruiken we Gson slechts als een JSON parser om een aantal 
-                                // interessante velden eruit te filteren, vervolgens sturen we het weer 
-                                // door als een String. Dit is niet optimaal, want er is AVRO serialization.
-                                // TODO: In plaats van dat de Producer String : String records stuurt
-                                // moet het met AVRO serialization gaan werken. 
-                                // Dus wordt het o.a. ProducerRecord<String, AvroTweet> 
+                ProducerRecord<String, AvroTweet> record = new ProducerRecord<>(
+                        searchTerm, Integer.toString(key), avroTweet
+                );
 
-                                ProducerRecord<String, String> record = new ProducerRecord<>(
-                                        topic, Integer.toString(key), value.toString()
-                                );
-                                producer.send(record);
+                    producer.send(record);
 
-                                System.out.println(String.format("topic=%s", topic));
-                                System.out.println(String.format("value=%s", value.toString()));
-
-                                // We pollen + sturen elke paar seconden iets, puur om te testen
-                                // De API van Twitter niet al te veel stresstesten
-                                Thread.sleep(2000);
-                                key++;
-                            } catch (InterruptedException interrupt) {
-                                System.out.println(interrupt);
-                            }
-                        } catch (JsonSyntaxException ex) {
-                            System.out.println("Bad syntax" + ex);
-                        }
-                    }
-                }
+                System.out.println(String.format("topic=%s", searchTerm));
+                System.out.println(String.format("value=%s", avroTweet.toString()));
+                key++;
             }
-        };
+        }
     }
 
-    public static void produce() {
-        thread.start();
+    public static void ReadTwitterPost(String searchPattern, int page, java.util.List<ai.axonx.workshop.quotes_record> tweets) {
+        if (tweets == null)
+            throw new IllegalArgumentException("Argument tweets can't be null");
+
+        Client client = ClientBuilder.newClient();
+
+        WebTarget target = client.target("https://api.tronalddump.io/search/quote?query=" + searchPattern + "&page=" + page);
+        client.register(String.class);
+        Invocation.Builder invocationBuilder
+                = target.request(MediaType.APPLICATION_JSON);
+
+        Gson gson = new Gson();
+
+        // Get response
+        Response response = target.request().get();
+
+        // Put json response in string
+        String tweet = response.readEntity(String.class);
+
+        // Parse json
+        TronaldDump value = gson.fromJson(tweet, TronaldDump.class);
+
+        response.close();
+        client.close();
+
+        // Get tweets
+        tweets.addAll(value.getEmbedded$1().getQuotes());
+
+        // Get tweets recursive (fake pagination)
+        if ((25 * page) < value.getTotal()) {
+
+            // Don't overtax the api
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException interrupt) {
+                System.out.println(interrupt);
+            }
+
+            // Get next 25 tweets
+            ReadTwitterPost(searchPattern, page + 1, tweets);
+        }
+
+        System.out.println("Got range " + (25 * page) + " tweets of search term total " + value.getTotal() + ".");
     }
 }

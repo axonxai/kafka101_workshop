@@ -49,10 +49,9 @@ public class Demonstration {
 
     public static void main(String[] args) {
         // Topics -- Twitter zoektermen
-        List<String> topics = Arrays.asList("eurovision", "europe");
+        List<String> topics = Arrays.asList("obama", "hillary", "pocahontas", "poor");
         String brokers = "localhost:9092";
 
-        TwitterProducer.init(topics, brokers);
-        TwitterProducer.produce();
+        TwitterProducer.init(topics,brokers);
     }
 }

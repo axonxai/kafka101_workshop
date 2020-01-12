@@ -1,57 +1,33 @@
-[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
+[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02)
 
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
 **Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
 
-Clone deze git-repo:
+De asumptie is dat je de voorbereiding hebt gevolgd; de volgende stap is het achterhalen van het gateway IP adres (docker host ip).
 
-    $ git clone git@github.com:axonxai/kafka101_workshop.git
-
-of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.zip
-    
-We beginnen met het starten van onze Kafka setup, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
-
-    $ cd cp-all-in-one
-    $ docker-compose up
-
-Je ziet een hoop gepruttel, dit is goed :) Laat de terminal met rust en open een andere terminal waar je mee verder gaat!
-
-Controleer of je ongeveer dezelfde output ziet als hieronder met het volgende docker commando
-
-    $ docker ps
-
-    CONTAINER ID        IMAGE                                             COMMAND                  CREATED             STATUS              PORTS                                              NAMES
-    cdf381c63565        confluentinc/cp-enterprise-control-center:5.2.1   "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:9021->9021/tcp                             control-center
-    03b85067d06f        confluentinc/cp-ksql-cli:5.2.1                    "/bin/sh"                3 days ago          Up 2 minutes                                                           ksql-cli
-    b4e2cabcafc2        confluentinc/ksql-examples:5.1.2                  "bash -c 'echo Waiti…"   3 days ago          Up 2 minutes                                                           ksql-datagen
-    21b2f105787f        confluentinc/cp-ksql-server:5.2.1                 "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8088->8088/tcp                             ksql-server
-    0ccfcca6434c        confluentinc/cp-kafka-rest:5.2.1                  "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8082->8082/tcp                             rest-proxy
-    3eecab329713        confluentinc/kafka-connect-datagen:latest         "bash -c 'if [ ! -d …"   3 days ago          Up 2 minutes        0.0.0.0:8083->8083/tcp, 9092/tcp                   connect
-    6b03d0385e7f        confluentinc/cp-schema-registry:5.2.1             "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:8081->8081/tcp                             schema-registry
-    5f6603ae7ff0        confluentinc/cp-enterprise-kafka:5.2.1            "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:9092->9092/tcp, 0.0.0.0:29092->29092/tcp   broker
-    87d4ea06496e        confluentinc/cp-zookeeper:5.2.1                   "/etc/confluent/dock…"   3 days ago          Up 3 minutes        2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp         zookeeper
-
-We moeten nu het gateway IP adres (docker host ip) achterhalen
-
-    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
+    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:x.x.x >
 
 ```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
 
 ## Berichten sturen met de CLI
 
 Ondanks dat Kafka default staat ingesteld om automatisch een topic aan te maken indien die nog ontbreekt, is het een 'best practice' om topic klaar te zetten, je hebt dan de mogelijkheid om je replicatie en andere properties in te stellen per topic.
+Omdat we alles in docker draaien betekent dit ook dat onze commandline commando's zich daar bevinden. Om dit  makkelijker te maken is er een mapje met wrappers (voor windows en *nix). Om een kafka commando uit te voeren kan je in dat mapje staan en elk commando prefixen met ./. Bijvoorbeeld ./kafka-topics .
 
 ### Een topic creëren, doen we op de volgende manier
-    $ kafka-topics --zookeeper <ip-adres>:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
+
+Omdat we met docker werken moeten in plaats van het <ip-adres> de hostnaam gebruiken, voor zookeeper is dat zookeeper
+    $ kafka-topics --zookeeper zookeeper:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
 
 Als het goed is zie je nu je aangemaakte topic (met een hoop al bestaande internal topic):
 
-    $ kafka-topics --zookeeper <ip-adres>:2181 --list
+    $ kafka-topics --zookeeper zookeeper:2181 --list
 
 ### Een bericht sturen
 
-    $ kafka-console-producer --broker-list <ip-adres>:9092 --topic hello_world
+Omdat we met docker werken moeten in plaats van het <ip-adres> de hostnaam gebruiken, voor de broker is dat broker
+    $ kafka-console-producer --broker-list broker:29092 --topic hello_world
     > hallo
 
 Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en zolang je niet op <ctrl>-c drukt blijf je berichten sturen.
@@ -59,7 +35,7 @@ Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en z
 ### Een bericht bekijken
 Open nu een nieuwe terminal en start een consumer met:
 
-    $ kafka-console-consumer --bootstrap-server <ip-adres>:9092 --topic hello_world
+    $ kafka-console-consumer --bootstrap-server broker:29092 --topic hello_world
 
 Nu kun je het topic uitlezen en komen hier nieuwe berichten voorbij. 
 Als je alle berichten wilt zien voeg je `--from-beginning` toe aan het commando. 
@@ -70,7 +46,7 @@ We hebben nu de standaard Kafka tooling gebruikt om berichten te sturen en uit t
 
 ## Let's code: een Producer in Java
 
-Open je favoriete editor en importeer de producer-directory,
+Open je favoriete IDE en importeer de producer-directory als een maven project,
 
 Gebruik voor de oefeningen de JavaDocs van Confluent Kafka: https://kafka.apache.org/0100/javadoc/index.html?index-all.html
 
