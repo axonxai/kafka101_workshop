@@ -2,41 +2,66 @@
 
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
-**Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een Java programma maken om berichten van en naar Kafka te sturen.
+**Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een simpel Java programma maken om berichten van en naar Kafka te sturen.
 
-Clone deze git-repo:
+In huiswerk opdracht had je al de Confluent repo opgehaald, we gaan nu onze Kafka setup draaien.
 
-    $ git clone git@github.com:axonxai/kafka101_workshop.git
+Open een terminal, voer de volgende commando's uit:
 
-of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.zip
-    
-We beginnen met het starten van onze Kafka setup, open een terminal en ga naar de directory 'cp-all-in-one' en start de docker images:
-
-    $ cd cp-all-in-one
+    $ git clone https://github.com/confluentinc/examples.git
+    $ cd examples/cp-all-in-one
     $ docker-compose up
 
-Je ziet een hoop gepruttel, dit is goed :) Laat de terminal met rust en open een andere terminal waar je mee verder gaat!
+
+je ziet een hoop gepruttel, dit is goed :) 
 
 Controleer of je ongeveer dezelfde output ziet als hieronder met het volgende docker commando
 
     $ docker ps
 
-    CONTAINER ID        IMAGE                                             COMMAND                  CREATED             STATUS              PORTS                                              NAMES
-    cdf381c63565        confluentinc/cp-enterprise-control-center:5.2.1   "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:9021->9021/tcp                             control-center
-    03b85067d06f        confluentinc/cp-ksql-cli:5.2.1                    "/bin/sh"                3 days ago          Up 2 minutes                                                           ksql-cli
-    b4e2cabcafc2        confluentinc/ksql-examples:5.1.2                  "bash -c 'echo Waiti…"   3 days ago          Up 2 minutes                                                           ksql-datagen
-    21b2f105787f        confluentinc/cp-ksql-server:5.2.1                 "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8088->8088/tcp                             ksql-server
-    0ccfcca6434c        confluentinc/cp-kafka-rest:5.2.1                  "/etc/confluent/dock…"   3 days ago          Up 2 minutes        0.0.0.0:8082->8082/tcp                             rest-proxy
-    3eecab329713        confluentinc/kafka-connect-datagen:latest         "bash -c 'if [ ! -d …"   3 days ago          Up 2 minutes        0.0.0.0:8083->8083/tcp, 9092/tcp                   connect
-    6b03d0385e7f        confluentinc/cp-schema-registry:5.2.1             "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:8081->8081/tcp                             schema-registry
-    5f6603ae7ff0        confluentinc/cp-enterprise-kafka:5.2.1            "/etc/confluent/dock…"   3 days ago          Up 3 minutes        0.0.0.0:9092->9092/tcp, 0.0.0.0:29092->29092/tcp   broker
-    87d4ea06496e        confluentinc/cp-zookeeper:5.2.1                   "/etc/confluent/dock…"   3 days ago          Up 3 minutes        2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp         zookeeper
+    docker ps
+    CONTAINER ID        IMAGE                                             COMMAND                  CREATED             STATUS                             PORTS                                        NAMES
+    1a3778716a1c        confluentinc/cp-ksql-cli:5.4.0                    "/bin/sh"                29 seconds ago      Up 27 seconds                                                                   ksql-cli
+    0e20ef5888ff        confluentinc/ksql-examples:5.4.0                  "bash -c 'echo Waiti…"   29 seconds ago      Up 27 seconds                                                                   ksql-datagen
+    658957a5888f        confluentinc/cp-enterprise-control-center:5.4.0   "/etc/confluent/dock…"   29 seconds ago      Up 27 seconds                      0.0.0.0:9021->9021/tcp                       control-center
+    a15831bc609a        confluentinc/cp-ksql-server:5.4.0                 "/etc/confluent/dock…"   29 seconds ago      Up 29 seconds (health: starting)   0.0.0.0:8088->8088/tcp                       ksql-server
+    fa36274f07c5        cnfldemos/cp-server-connect-datagen:0.2.0-5.4.0   "/etc/confluent/dock…"   30 seconds ago      Up 29 seconds                      0.0.0.0:8083->8083/tcp, 9092/tcp             connect
+    ec2125ee2bcd        confluentinc/cp-kafka-rest:5.4.0                  "/etc/confluent/dock…"   30 seconds ago      Up 29 seconds                      0.0.0.0:8082->8082/tcp                       rest-proxy
+    a023e2131d25        confluentinc/cp-schema-registry:5.4.0             "/etc/confluent/dock…"   31 seconds ago      Up 30 seconds                      0.0.0.0:8081->8081/tcp                       schema-registry
+    6cd1525b11b0        confluentinc/cp-server:5.4.0                      "/etc/confluent/dock…"   31 seconds ago      Up 31 seconds                      0.0.0.0:9092->9092/tcp                       broker
+    622f3950c8d0        confluentinc/cp-zookeeper:5.4.0                   "/etc/confluent/dock…"   33 seconds ago      Up 31 seconds                      2888/tcp, 0.0.0.0:2181->2181/tcp, 3888/tcp   zookeeper
+
+
+We draaien nu het Confluent Kafka platform, laten we even kijken naar de extra's binnen deze opzet:
+
+Open een browser met: http://127.0.0.1:9021
+
+Je ziet nu het Control-Center en kunt alles over het Kafka cluster bekijken:
+
+![image](img/control-center.png "control-center")
+
+Kijk of het cluster al "healhty" is, klik daarna links op het cluster om daar de details te bekijken:
+
+![image](img/cluster-overview.png "cluster-overview")
+
+
+In de volgende plaat, kun je het verschil zien tussen Kafka, Open Source Confluent Kafka, Confluent Kafka platform:
+
+![image](img/overview.png "overview")
+
 
 We moeten nu het gateway IP adres (docker host ip) achterhalen
 
     $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
 
 ```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
+
+
+Open een nieuwe terminal en clone deze git-repo:
+
+    $ git clone git@github.com:axonxai/kafka101_workshop.git
+
+of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.zip
 
 ## Berichten sturen met de CLI
 
