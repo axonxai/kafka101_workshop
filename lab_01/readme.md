@@ -4,6 +4,8 @@
 
 **Doel:** In dit lab gaan we aan de slag met Kafka, we zullen met tooling en als laatste stap met een simpel Java programma maken om berichten van en naar Kafka te sturen.
 
+(tooling nodig: docker, docker-compose, git, java, IDE, terminal)
+
 In huiswerk opdracht had je al de Confluent repo opgehaald, we gaan nu onze Kafka setup draaien.
 
 Open een terminal, voer de volgende commando's uit:
@@ -50,6 +52,7 @@ In de volgende plaat, kun je het verschil zien tussen Kafka, Open Source Conflue
 ![image](img/overview.png "overview")
 
 
+## We gaan nu aan de slag met Kafka 
 Open een nieuwe terminal en clone deze git-repo:
 
     $ git clone git@github.com:axonxai/kafka101_workshop.git
@@ -124,8 +127,5 @@ Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan w
  
  [Next Lab](https://github.com/axonxai/kafka101_workshop/blob/master/lab_02/readme.md)
 
-We moeten nu het gateway IP adres (docker host ip) achterhalen
 
-    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
 
-```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
