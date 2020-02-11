@@ -10,10 +10,10 @@ Het doel van deze workshop is om snel hands-on aan de slag te kunnen gaan met Ka
 3. ✅ Kafka Registry - Avro schema's - again Twitter sniffer maar nu avro based
 4. ✅KSQL stream maken met filter-tweets
 5. ✅Kafka connect - inlezen SQL lite data - tabel met Amerika synoniemen en scheldwoorden
-6. ✅ 
-7. [?] Chaos Monkey: Brokers onderuit halen 
-8. [todo] Kafka REST API 
-9. [todo] Compacting
+6. ✅KSQL again
+7. ✅ Chaos Monkey: Brokers onderuit halen 
+
+Future TODO's: Compaction, Kafka REST, Kafka RBAC/ACLs, Kafka 
 
 
 In ieder lab staan de instructie in de readme.md files, en ja we zullen zo nu en dan de labs updaten, mocht je nog fouten vinden of onduidelijkheden of tips & verbeteringen, open dan een Pull Request.
