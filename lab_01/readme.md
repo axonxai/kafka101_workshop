@@ -1,4 +1,4 @@
-[Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
+[Next Lab](https://github.com/axonxai/kafka101_workshop/blob/master/lab_02/readme.md)
 
 # LAB-01 Maak een Kafka "hello world" producer en een consumer
 
@@ -50,13 +50,6 @@ In de volgende plaat, kun je het verschil zien tussen Kafka, Open Source Conflue
 ![image](img/overview.png "overview")
 
 
-We moeten nu het gateway IP adres (docker host ip) achterhalen
-
-    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
-
-```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
-
-
 Open een nieuwe terminal en clone deze git-repo:
 
     $ git clone git@github.com:axonxai/kafka101_workshop.git
@@ -67,16 +60,22 @@ of download de zip: https://github.com/axonxai/kafka101_workshop/archive/master.
 
 Ondanks dat Kafka default staat ingesteld om automatisch een topic aan te maken indien die nog ontbreekt, is het een 'best practice' om topic klaar te zetten, je hebt dan de mogelijkheid om je replicatie en andere properties in te stellen per topic.
 
+Start met volgende cmd een container met de kafka tooling op in hetzelfde netwerk als onze andere containers:
+
+    $ docker run -ti --net=cp-all-in-one_default  kafkatools
+
+Binnen deze container kunnen we nu alle CLI cmd uitvoeren:
+
 ### Een topic creëren, doen we op de volgende manier
-    $ kafka-topics --zookeeper <ip-adres>:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
+    $ kafka-topics --zookeeper zookeeper:2181 --create --replication-factor 1 --partitions 1 --topic hello_world
 
 Als het goed is zie je nu je aangemaakte topic (met een hoop al bestaande internal topic):
 
-    $ kafka-topics --zookeeper <ip-adres>:2181 --list
+    $ kafka-topics --zookeeper zookeeper:2181 --list
 
 ### Een bericht sturen
 
-    $ kafka-console-producer --broker-list <ip-adres>:9092 --topic hello_world
+    $ kafka-console-producer --broker-list broker:29092 --topic hello_world
     > hallo
 
 Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en zolang je niet op <ctrl>-c drukt blijf je berichten sturen.
@@ -84,10 +83,12 @@ Nu kun je een reeks berichten sturen naar dit topic, je krijgt een prompt > en z
 ### Een bericht bekijken
 Open nu een nieuwe terminal en start een consumer met:
 
-    $ kafka-console-consumer --bootstrap-server <ip-adres>:9092 --topic hello_world
+    $ kafka-console-consumer --bootstrap-server broker:29092 --topic hello_world 
 
 Nu kun je het topic uitlezen en komen hier nieuwe berichten voorbij. 
 Als je alle berichten wilt zien voeg je `--from-beginning` toe aan het commando. 
+
+We stoppen nu de container met ctrl-c, je bent weer terug in je terminal.
 
 We hebben nu de standaard Kafka tooling gebruikt om berichten te sturen en uit te lezen uit een topic, als laatste onderdeel in dit lab gaan we dit nu doen met een stukje Java. 
 
@@ -121,4 +122,10 @@ Hetzelfde als Producer lab, volg de instructies op in de code en zie de berichte
 
 Nu we een idee hebben hoe we met Java een producer/consumer kunnen maken, gaan we verder met onze ontdekkingstocht rond Kafka :)
  
- [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/iteratie_01/lab_02)
+ [Next Lab](https://github.com/axonxai/kafka101_workshop/blob/master/lab_02/readme.md)
+
+We moeten nu het gateway IP adres (docker host ip) achterhalen
+
+    $ docker inspect <container id van confluentinc/cp-enterprise-kafka:5.2.1 >
+
+```Note: Dit noemen we in de volgende oefeningen <ip-adres> !!!```
