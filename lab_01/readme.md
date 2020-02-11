@@ -65,7 +65,7 @@ Ondanks dat Kafka default staat ingesteld om automatisch een topic aan te maken 
 
 Start met volgende cmd een container met de kafka tooling op in hetzelfde netwerk als onze andere containers:
 
-    $ docker run -ti --net=cp-all-in-one_default  kafkatools
+    $ docker run -ti --net=cp-all-in-one_default bvoudenaarde/kafkatools:latest
 
 Binnen deze container kunnen we nu alle CLI cmd uitvoeren:
 
