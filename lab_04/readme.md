@@ -51,18 +51,18 @@ Stap 2:
 
     $ CREATE STREAM kstream_trump_tweets AS
         SELECT *, user->name as user_name
-        FROM kstream_twitter_tweets WHERE user_name='realDonaldTrump';
+        FROM kstream_twitter_tweets WHERE text LIKE                'realDonaldTrump';
 
 We kunnen nu een SQL gebruiken om door onze streaming data heen te browsen, met ctrl-c onderbreek je de query:
 
-    $ SELECT * FROM kstream_trump_tweets EMIT CHANGES;;
+    $ SELECT * FROM kstream_trump_tweets EMIT CHANGES;
 
 
 Maak nu een tabel met users en aantal tweets, en bekijk deze tabel
 
     $ CREATE TABLE ktable_user_tweet_count AS
-        SELECT user_name, COUNT(*) AS tweet_count
-        FROM kstream_trump_tweets;
+>        SELECT user_name, COUNT(*) AS tweet_count
+>        FROM kstream_trump_tweets GROUP BY user_name;
 
 Dit is de dualiteit van Kafka, het is streaming maar ook tegelijker tijd een database: 
 
