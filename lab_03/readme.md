@@ -222,5 +222,10 @@ Fix eerst het avro schema in de resource folder met de volgende attributen:
     text,
     liked
 
+Als je 
+
+    $ mvn install
+
+draait, zul je zien dan in target-dir het TweetLikes Java class wordt gegenereerd !!!
 
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_04)
