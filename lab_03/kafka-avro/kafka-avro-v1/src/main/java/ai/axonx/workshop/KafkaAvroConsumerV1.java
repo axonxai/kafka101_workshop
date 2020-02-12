@@ -26,20 +26,17 @@ public class KafkaAvroConsumerV1 {
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
         properties.setProperty("specific.avro.reader", "true");
 
-//        KafkaConsumer<String, TweetLikes> kafkaConsumer = new KafkaConsumer<>(properties);
-//        String topic = "avro-tweet";
-//        kafkaConsumer.subscribe(Collections.singleton(topic));
-//
-//        System.out.println("Waiting for data...");
+       KafkaConsumer<String, TweetLikes> kafkaConsumer = new KafkaConsumer<>(properties);
+       String topic = "avro-tweet";
+       kafkaConsumer.subscribe(Collections.singleton(topic));
+
+       System.out.println("Waiting for data...");
 //
 //        while (true){
 //            System.out.println("Polling");
-//            ConsumerRecords<String, TweetLikes> records = kafkaConsumer.poll(1000);
+//            ConsumerRecords<String, ??? > records = kafkaConsumer.poll(1000);
 //
-//            for (ConsumerRecord<String, TweetLikes> record : records){
-//                TweetLikes tweetLikes = record.value();
-//                System.out.println(tweetLikes);
-//            }
+//            TODO: loop door records
 //
 //            kafkaConsumer.commitSync();
 //        }

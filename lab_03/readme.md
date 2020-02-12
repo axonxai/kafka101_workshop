@@ -26,6 +26,8 @@ Binnen Kafka is gekozen voor Avro. Avro encoding is beschreven als een JSON sche
 
 In vorige versies vond validatie op de edge's en dus niet in Kafka. In het v5.4 Confluent Platform zijn nu wel validaties ingebakken, zie https://docs.confluent.io/current/schema-registry/schema-validation.html#schema-validation
 
+
+
 ## Avro Record Schema structuur
 Een Avro schema heeft een record structuur als volgt:
 
@@ -202,9 +204,23 @@ Op deze manier kunnen we op een Agile manier onze Enterprises voorzien van nieuw
 
 ### ***Oefening 3 Kafka Avro Producer***
 
-Spiek nog even in Lab_02 naar de Producer code, we gaan nu Avro schema validatie toepassen. In de directory Lab_03/twitter vind je de voorbereidingen voor Avro
+Zoals we boven met de kafka-avro-console-producer/consumer hebben gespeeld gaan we nu een versimpelde versie van Tweets icm avro validatie in Java uit proberen,
 
-TODO: beschrijf lab
+In Java kunnen we een avro schema omzetten in een Java POJO, die we dan kunnen invullen qua waardes:
+
+    TweetLikes tweetLikes = TweetLikes.newBuilder()
+                .setCreatedAt(12345678)
+                .setLiked(455)
+                .setText("tweet message")
+                .build();
+
+In de Kafka properties zowel voor de producer en consumer moeten we instellen voor avro decoding.
+
+Fix eerst het avro schema in de resource folder met de volgende attributen:
+
+    created_at
+    text,
+    liked
 
 
 [Previous Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_02) | [Next Lab](https://github.com/axonxai/kafka101_workshop/tree/master/lab_04)

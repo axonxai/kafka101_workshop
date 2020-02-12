@@ -17,37 +17,33 @@ public class KafkaAvroProducerV1 {
         properties.setProperty("retries", "10");
         // avro part
         properties.setProperty("key.serializer", StringSerializer.class.getName());
+        // Alleen values met avro decoding
         properties.setProperty("value.serializer", KafkaAvroSerializer.class.getName());
         properties.setProperty("schema.registry.url", "http://127.0.0.1:8081");
 
-//        Producer<String, TweetLikes> producer = new KafkaProducer<String, TweetLikes>(properties);
-//
+//        Producer TODO init de producer, let op voor values hebben we nu iets anders dan een String
 //        String topic = "avro-tweet";
 //
 //        // copied from avro examples
-//        TweetLikes tweetLikes = TweetLikes.newBuilder()
-//                .setCreatedAt(12345678)
-//                .setLiked(455)
-//                .setText("tweet message")
-//                .build();
+//        TweetLikes tweetLikes = TODO maak tweetLikes object
 //
-//        ProducerRecord<String, TweetLikes> producerRecord = new ProducerRecord<String, TweetLikes>(
-//                topic, tweetLikes
-//        );
-//
-//        System.out.println(tweetLikes);
-//        producer.send(producerRecord, new Callback() {
-//            @Override
-//            public void onCompletion(RecordMetadata metadata, Exception exception) {
-//                if (exception == null) {
-//                    System.out.println(metadata);
-//                } else {
-//                    exception.printStackTrace();
-//                }
-//            }
-//        });
-//
-//        producer.flush();
-//        producer.close();
+       ProducerRecord<String, TweetLikes> producerRecord = new ProducerRecord<String, TweetLikes>(
+               topic, tweetLikes
+       );
+
+       System.out.println(tweetLikes);
+       producer.send(producerRecord, new Callback() {
+           @Override
+           public void onCompletion(RecordMetadata metadata, Exception exception) {
+               if (exception == null) {
+                   System.out.println(metadata);
+               } else {
+                   exception.printStackTrace();
+               }
+           }
+       });
+
+       producer.flush();
+       producer.close();
     }
 }

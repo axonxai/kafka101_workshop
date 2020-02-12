@@ -1,4 +1,4 @@
-# LAB-10 (?) Chaos monkey spelen in een Kafka cluster
+# LAB-7 Chaos monkey spelen in een Kafka cluster
 
 We gaan een kijkje nemen naar hoe robuust een Kafka cluster is.
 Hier gebruiken we een andere docker-compose.yml, dus sluit eerst de vorige docker containers af door `docker-compose down` te gebruiken in de map cp-all-in-one.
