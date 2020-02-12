@@ -1,15 +1,39 @@
-# LAB-06 KSQL & filter tweets
+# LAB-04 KSQL & filter tweets
 In dit lab gaan we aan de slag met KSQL, de query language van Confluent. Hiermee is het bv. mogelijk om op streaming data analyses uit te voeren of om statische data en streaming data in een join te querien. 
 
 ## Een overzicht van de actiefste users
 
+Open een nieuwe terminal en run het volgende commando:
+
+    $ docker exec -ti ksql-cli bash
+
 start de ksql-cli
-```ksql```
+
+    $ ksql http://ksql-server:8088
+
+                  ===========================================
+                  =        _  __ _____  ____  _             =
+                  =       | |/ // ____|/ __ \| |            =
+                  =       | ' /| (___ | |  | | |            =
+                  =       |  <  \___ \| |  | | |            =
+                  =       | . \ ____) | |__| | |____        =
+                  =       |_|\_\_____/ \___\_\______|       =
+                  =                                         =
+                  =  Streaming SQL Engine for Apache Kafka® =
+                  ===========================================
+
+    Copyright 2017-2019 Confluent Inc.
+
+    CLI v5.4.0, Server v5.4.0 located at http://ksql-server:8088
+
+    Having trouble? Type 'help' (case-insensitive) for a rundown of how things work!
+
+    ksql>
 
 Voordat je begint is het belangrijk dat je zorgt dat alle streams vanaf het begin van een topic gaan consumen.
-```sh
-$ SET 'auto.offset.reset'='earliest';
-```
+
+    $ SET 'auto.offset.reset'='earliest';
+    Successfully changed local property 'auto.offset.reset' to 'earliest'. Use the UNSET command to revert your change.
 
 Om een stream te maken van het topic maken we een 1-op-1 kopie van het topic "trump_tweets". Wel maken we een stream met een gefilterd aantal attributen. 
 ```sh

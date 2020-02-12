@@ -1,4 +1,4 @@
-# LAB-07 Kafka connect - inlezen SQL lite data 
+# LAB-05 Kafka connect - inlezen SQL lite data 
 
 Met dit lab willen we laten zien, dat het mogelijk is om zowel uit database te lezen uit en te schrijven naar Kafka. Ook kun je up to date blijven bij Database wijzigingen. Er zijn heel veel mogelijkheden qua connectoren, bekijk [https://www.confluent.io/hub]. Nu gaan we aan de slag om een SQLite database uit te lezen via Kafka-Connect. Hiervoor gaan we gebruik maken van de JDBC connector van Kafka-Connect.
 
