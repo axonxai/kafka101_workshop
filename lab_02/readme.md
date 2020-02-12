@@ -10,7 +10,7 @@ Sinds Fake News een paar jaar geleden een hot topic is geworden,  is het niet zo
 
 Wij hebben daarom een Twitter Dev account draaien, die tijdens de de workshop tweets ophaalt die wij lokaal (iedere laptop) gaan gebruiken. 
 
-<plaatje>
+![image](img/aws.jpg "aws")
 
  Een developer account aanvraag bij twitter gaat via de volgende URL: https://developer.twitter.com/content/developer-twitter/en.html
 
