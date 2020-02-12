@@ -35,41 +35,55 @@ Voordat je begint is het belangrijk dat je zorgt dat alle streams vanaf het begi
     $ SET 'auto.offset.reset'='earliest';
     Successfully changed local property 'auto.offset.reset' to 'earliest'. Use the UNSET command to revert your change.
 
-Om een stream te maken van het topic maken we een 1-op-1 kopie van het topic "trump_tweets". Wel maken we een stream met een gefilterd aantal attributen. 
-```sh
-$ CREATE STREAM kstream_twitter_tweets
-    (created_at VARCHAR, 
-    id BIGINT,
-    user STRUCT <
-        name VARCHAR, 
-        location VARCHAR, 
+Om een stream te maken van het topic maken we een 1-op-1 kopie van het topic "twitter_tweets" uit lab_02, waar we mbv een nieuwe stream maken door te filteren op de 'name' attribute: 
+
+Stap 1:
+
+    $ CREATE STREAM kstream_twitter_tweets
+        (created_at VARCHAR, 
+        id BIGINT,
+        user STRUCT < name VARCHAR, 
         followers_count INTEGER>, 
-    text VARCHAR) 
-    WITH (KAFKA_TOPIC='twitter_tweets',  VALUE_FORMAT='JSON');
+        text VARCHAR) 
+        WITH (KAFKA_TOPIC='twitter_tweets',  VALUE_FORMAT='JSON');
 
-# create an enriched stream with user_name
-$ CREATE STREAM kstream_twitter_tweets_enriched AS
-SELECT *, user->name as user_name
-FROM kstream_twitter_tweets PARTITION BY user_name;
-```
+Stap 2:
 
-Als het goed is krijg je nu een melding "stream is created" of iets dergelijks.
+    $ CREATE STREAM kstream_trump_tweets AS
+        SELECT *, user->name as user_name
+        FROM kstream_twitter_tweets WHERE user_name='realDonaldTrump';
 
-Om nu de inhoud van deze stream te bekijken, kun je via de ksql cli het volgende doen:
-```sh
-$ SELECT * FROM kstream_twitter_tweets_enriched;
-```
+We kunnen nu een SQL gebruiken om door onze streaming data heen te browsen, met ctrl-c onderbreek je de query:
+
+    $ SELECT * FROM kstream_trump_tweets EMIT CHANGES;;
+
 
 Maak nu een tabel met users en aantal tweets, en bekijk deze tabel
-```sh
-$ CREATE TABLE ktable_user_tweet_count AS
-  SELECT user_name, COUNT(*) AS tweet_count
-  FROM kstream_twitter_tweets_enriched 
-  GROUP BY user_name;
-$ SELECT * FROM ktable_user_tweet_count;
-```
 
-Dit gaan we nu uitbreiden omdat we alleen geïnteresseerd zijn in de meest actieve gebruikers op dit moment, dit doen we o.b.v. een tumbling window
+    $ CREATE TABLE ktable_user_tweet_count AS
+        SELECT user_name, COUNT(*) AS tweet_count
+        FROM kstream_trump_tweets;
+
+Dit is de dualiteit van Kafka, het is streaming maar ook tegelijker tijd een database: 
+
+    $ SELECT * FROM ktable_user_tweet_count;
+
+Je ziet dat dit een eindeloze query is, met CTRL-c kun je de boel stoppen.
+
+
+D
+## Let's make the Filter "great" again
+
+    $ CREATE STREAM kstream_twitter_tweets_with_filter AS
+        SELECT *
+        FROM kstream_twitter_tweets_enriched
+        WHERE text LIKE '% USA %';
+
+
+
+== uitzoeken nog relavant?
+
+it gaan we nu uitbreiden omdat we alleen geïnteresseerd zijn in de meest actieve gebruikers op dit moment, dit doen we o.b.v. een tumbling window
 ```sh
 #verwijder de oude tabel
 $ DROP TABLE ktable_user_tweet_count;
@@ -82,15 +96,6 @@ $ CREATE TABLE ktable_user_tweet_count AS
 ```
 Voor de overzichtelijkheid kun je natuurlijk nog zoiets toevoegen als `WHERE tweet_count > 3`
 
-
-## Let's make the Filter "great" again
-
-```sh
-$ CREATE STREAM kstream_twitter_tweets_with_filter AS
-SELECT *
-FROM kstream_twitter_tweets_enriched
-WHERE text LIKE '% USA %';
-```
 
 ## OPDRACHT - We willen weten welke actieve users bepaalde woorden tweeten - Doe dit mbv een join tussen een stream en een table 
 
