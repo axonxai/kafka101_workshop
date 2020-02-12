@@ -61,8 +61,8 @@ We kunnen nu een SQL gebruiken om door onze streaming data heen te browsen, met 
 Maak nu een tabel met users en aantal tweets, en bekijk deze tabel
 
     $ CREATE TABLE ktable_user_tweet_count AS
->        SELECT user_name, COUNT(*) AS tweet_count
->        FROM kstream_trump_tweets GROUP BY user_name;
+        SELECT user_name, COUNT(*) AS tweet_count
+       FROM kstream_trump_tweets GROUP BY user_name;
 
 Dit is de dualiteit van Kafka, het is streaming maar ook tegelijker tijd een database: 
 
@@ -84,16 +84,17 @@ D
 == uitzoeken nog relavant?
 
 it gaan we nu uitbreiden omdat we alleen geïnteresseerd zijn in de meest actieve gebruikers op dit moment, dit doen we o.b.v. een tumbling window
-```sh
-#verwijder de oude tabel
-$ DROP TABLE ktable_user_tweet_count;
+
+    #verwijder de oude tabel
+    $ DROP TABLE ktable_user_tweet_count;
+
 # Waarschijnlijk krijg je een melding dat er eerst een andere query moet verwijderen, dit doe je met 'TERMINATE <query>'
 
 $ CREATE TABLE ktable_user_tweet_count AS
   SELECT user_name, COUNT(*) AS tweet_count
   FROM kstream_twitter_tweets_enriched WINDOW TUMBLING (SIZE 1 MINUTES)
   GROUP BY user_name;
-```
+
 Voor de overzichtelijkheid kun je natuurlijk nog zoiets toevoegen als `WHERE tweet_count > 3`
 
 
