@@ -204,7 +204,7 @@ Op deze manier kunnen we op een Agile manier onze Enterprises voorzien van nieuw
 
 ### ***Oefening 3 Kafka Avro Producer***
 
-Zoals we boven met de kafka-avro-console-producer/consumer hebben gespeeld gaan we nu een versimpelde versie van Tweets icm avro validatie in Java uit proberen,
+Zoals we boven met de kafka-avro-console-producer/consumer hebben gespeeld, gaan we nu een versimpelde versie van Tweets icm avro validatie in Java uit proberen,
 
 In Java kunnen we een avro schema omzetten in een Java POJO, die we dan kunnen invullen qua waardes:
 
