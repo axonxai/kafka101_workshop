@@ -9,7 +9,7 @@
 
     <properties>
      <avro.version>1.9.1</avro.version>
-        <kafka.version>2.4.0</kafka.version>
+        <kafka.version>5.3.0-ccs</kafka.version>
         <confluent.version>3.3.1</confluent.version>
     </properties>
 
